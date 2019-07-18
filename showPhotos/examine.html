@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1,user-scalable=no">
+    <meta name="format-detection" content="telephone=no">
+    <title>参赛人员详情</title>
+
+    <link rel="stylesheet" href="https://space-api.check.icaremgt.com/ACTIVITY/gitlab-static?url=http://gitlab.icaremgt.com/tanxinyu/h5_activity/raw/master/showPhotos/css/bootstrap.min.css?v=1.0" />
+    <link rel="stylesheet" href="https://space-api.check.icaremgt.com/ACTIVITY/gitlab-static?url=http://gitlab.icaremgt.com/tanxinyu/h5_activity/raw/master/showPhotos/css/lightbox.min.css" />
+    <link rel="stylesheet" href="https://space-api.check.icaremgt.com/ACTIVITY/gitlab-static?url=http://gitlab.icaremgt.com/tanxinyu/h5_activity/raw/master/showPhotos/css/examine.css?v=1.10" />
+    <link rel="stylesheet" href="https://space-api.check.icaremgt.com/ACTIVITY/gitlab-static?url=http://gitlab.icaremgt.com/tanxinyu/h5_activity/raw/master/showPhotos/css/dialog.css">
+
+    <script type="text/javascript" src="https://space-api.check.icaremgt.com/ACTIVITY/gitlab-static?url=http://gitlab.icaremgt.com/tanxinyu/h5_activity/raw/master/showPhotos/js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="https://space-api.check.icaremgt.com/ACTIVITY/gitlab-static?url=http://gitlab.icaremgt.com/tanxinyu/h5_activity/raw/master/showPhotos/js/examine/bootstrap.js"></script>
+    <script type="text/javascript" src="https://space-api.check.icaremgt.com/ACTIVITY/gitlab-static?url=http://gitlab.icaremgt.com/tanxinyu/h5_activity/raw/master/showPhotos/js/examine/lightbox.min.js"></script>
+    <script type="text/javascript" src="https://space-api.check.icaremgt.com/ACTIVITY/gitlab-static?url=http://gitlab.icaremgt.com/tanxinyu/h5_activity/raw/master/showPhotos/js/dialog.js"></script>
+    <!-- <script type="text/javascript" th:inline="javascript">
+        var user = JSON.parse([[${user}]]);
+        var jsSdk = JSON.parse([[${jsSdk}]]);
+    </script> -->
+  </head>
+  
+  <body>
+    <div class="container full-height">
+        <div class="table-row">
+            <div class="table-cell">
+                <h3 class="title text-center" id="examineTitle"></h3>
+                <div class="content">
+                    <div class="row">
+                        <div class="col-sm-5">
+                            <a id="userImage" href="#" data-lightbox="example-1" style="display: none;">
+                                <img src="" class="picture full-width" />
+                            </a>
+                        </div>
+                        <div class="col-sm-7">
+                            <div class="info">
+                                <p><label>姓名：</label><span id="userName"></span> <small id="voteCount" class="text-danger pull-right"></small></p>
+                                <p><label>手机号：</label><span id="userPhone"></span></p>
+                                <p><label>机构名称：</label><span id="orgName"></span></p>
+                                <p><label>宣言：</label><span id="enounce"></span></p>
+                            </div>
+                        </div>
+                    </div>
+                    <h3 class="status-msg text-center" style="margin:0;"></h3>
+                    <div class="row edit-btn hide">
+                        <div class="col-xs-6">
+                            <input type="button" class="btn btn-danger btn-block" onclick="refuse()" value="驳回" />
+                        </div>
+                        <div class="col-xs-6">
+                            <input type="button" class="btn btn-success btn-block" onclick="pass()" value="通过" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  </body>
+  <script type="text/javascript" src="https://space-api.check.icaremgt.com/ACTIVITY/gitlab-static?url=http://gitlab.icaremgt.com/tanxinyu/h5_activity/raw/master/showPhotos/js/page/common.js"></script>
+  <script type="text/javascript" src="https://space-api.check.icaremgt.com/ACTIVITY/gitlab-static?url=http://gitlab.icaremgt.com/tanxinyu/h5_activity/raw/master/showPhotos/js/page/examine.js"></script>
+</html>

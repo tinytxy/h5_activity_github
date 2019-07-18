@@ -1,0 +1,14 @@
+/* 404 */
+.container-error {
+    
+}
+.container-error .error-page {
+    width: 100%;
+    text-align: center;
+    padding: 3rem 0;
+}
+.container-error .error-page p {
+    color: #666;
+    font-size: .24rem;
+    margin-top: .2rem;
+}
