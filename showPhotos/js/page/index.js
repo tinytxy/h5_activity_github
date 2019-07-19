@@ -202,6 +202,9 @@ function getAjaxListSearch(type,page,callback) {
         activityCode:activityCode,  // 活动id
         name: searchVal   // 搜索字段
     }
+
+    // 加载loading
+    showLoading();
     $.ajax({
         type: 'GET',
         url: baseUrl + '/ACTIVITY/sz/search/' + activityCode,
@@ -229,6 +232,7 @@ function getAjaxListSearch(type,page,callback) {
                     gb_rank_loaded = false
                 }
             }
+            hideLoading();
         },
         error: function() {
             if(type == 'player' || type == 'search') {
@@ -236,6 +240,7 @@ function getAjaxListSearch(type,page,callback) {
             }else if(type == 'rank') {
                 gb_rank_loaded = false
             }
+            hideLoading();
         }
     })
 }
@@ -339,13 +344,21 @@ function getRangeList(rankListData){
 // tab切换
 function tabChange(){
    var c_typename = $(this).attr("c_typename");
-   // 排行榜
    if(c_typename === 'rangerListBtn') {
-     $("#user-list").hide();
-     $("#range-list").show();   
+     // 排行榜列表
+     getAjaxListSearch('rank',1,function(rankListData){
+        getRangeList(rankListData);
+        $("#user-list").hide();
+        $("#range-list").show(); 
+     }); 
+       
    } else {
-     $("#user-list").show();
-     $("#range-list").hide();
+       // 参赛选手列表
+     getAjaxListSearch('player',1,function(playerListData){
+        getPlayerList(playerListData);
+        $("#user-list").show();
+        $("#range-list").hide();
+     });
    }
 }
 

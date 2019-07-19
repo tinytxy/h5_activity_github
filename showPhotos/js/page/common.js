@@ -337,6 +337,21 @@ function getActivityTitle() {
   })
 }
 
+// 加载loading
+function showLoading(){
+  $.dialog({
+    type : 'info',
+    infoText : '加载中…',
+    infoIcon : 'https://raw.githubusercontent.com/tinytxy/h5_activity_github/master/showPhotos/images/loading_2.gif',
+    direction: '',
+	  align: 'center'
+  });
+}
+// 关闭loading
+function hideLoading() {
+  $.dialog.close();
+}
+
 /* ***********************弹出框控制全部逻辑************************** */
 // 投票
 function voteClickFn(params, successCallback, errorCallback){ 
@@ -431,9 +446,20 @@ function playerHasVoteDialogBind(){
 
 // 参赛选手投票-无票
 function playerNoVoteDialogBind(){
-  // 我要参赛
+  // 查看排行
   $('#html-template-5 .vote-btn-1').off("click").on('click',function(){
       $('#html-template-5').fadeOut();
+      var _url = window.location.href;
+      var indexKey = 'view/'+ activityCode + '/1';
+      // 当前是首页则触发切换按钮
+      if(_url.indexOf(indexKey) > -1){
+        $("#act3152823482970").click();
+      }else {
+        // 当前非首页则跳转
+        var _t = getToken();
+        var _addParam = 'toRanger=1'
+        transPage('1',activityCode,_t,_addParam);
+      }
   });
 
   // 我要拉票
