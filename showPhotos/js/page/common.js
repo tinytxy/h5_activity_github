@@ -227,7 +227,7 @@ function appendAttentionDialog() {
   // 未关注过默认显示弹出框  
   if (!user.attention){
     $("#html-container-attention").fadeIn('normal', function() {
-      $(document).scrollTop(0);
+      // $(document).scrollTop(0);
     });
   }
 }
@@ -235,7 +235,7 @@ function appendAttentionDialog() {
 // 显示强关弹出框
 function showAttentionDialog() {
   $("#html-container-attention").fadeIn('normal', function() {
-    $(document).scrollTop(0);
+    // $(document).scrollTop(0);
   });
 }
 
@@ -362,12 +362,12 @@ function voteClickFn(params, successCallback, errorCallback){
           if(user.reviewStatus === 1) {
             $('#html-template-4 .struct span').text(data.result.voteNumDay)
             $('#html-template-4').fadeIn('normal', function() {
-              $(document).scrollTop(0);
+              // $(document).scrollTop(0);
             });
           }else {
             $('#html-template-6 .struct span').text(data.result.voteNumDay)
             $('#html-template-6').fadeIn('normal', function() {
-              $(document).scrollTop(0);
+              // $(document).scrollTop(0);
             });
           }
           successCallback && successCallback(data); 
@@ -376,12 +376,12 @@ function voteClickFn(params, successCallback, errorCallback){
           if(user.reviewStatus === 1) {
             $('#html-template-5 .struct span').text(rules.settings.szRule.voteNumDay)
             $('#html-template-5').fadeIn('normal', function() {
-              $(document).scrollTop(0);
+              // $(document).scrollTop(0);
             });
           }else {
             $('#html-template-7 .struct span').text(rules.settings.szRule.voteNumDay)
             $('#html-template-7').fadeIn('normal', function() {
-              $(document).scrollTop(0);
+              // $(document).scrollTop(0);
             });
           }
           errorCallback && errorCallback(data); 
