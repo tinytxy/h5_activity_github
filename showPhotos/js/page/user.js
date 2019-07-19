@@ -22,6 +22,11 @@ function btnBindClick() {
     });
     // 拉票
     $('#act31119351441050').off("click").on("click",function(){
+        // 设置分享参数
+        setWxShare({
+            userId: shareUserId,
+            userName: shareUserName
+        });
         $('#html-template-8').fadeIn('normal', function() {
             $(document).scrollTop(0);
         });
