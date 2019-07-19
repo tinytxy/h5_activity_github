@@ -11,6 +11,10 @@ if(typeof data !== 'undefined'){
   data.htmlJson = JSON.parse(data.htmlJson);
 }
 
+// 分享用户信息
+var shareUserId = '';
+var shareUserName = '';
+
 // 设置token
 function setToken(){
   if(user.token !== '') {
@@ -59,11 +63,35 @@ function getBaseOrigin(){
 function transPage(_pageNumber, _activityCode, _token, _addParam) {
   var url = '';
   var _base = '';
-  var _urlParam = window.location.search;
+  var _urlParam = getRequest();
+  var _newUrlParam = '';
   _base = getBaseOrigin();
- 
-  if (typeof _urlParam !== 'undefined' && _urlParam !== '') {
-      url = _base + "/ACTIVITY/view/" + _activityCode + "/" + _pageNumber + _urlParam + (_addParam !== undefined ? ('&' + _addParam) : '');
+
+  // 报名页之外的页面过滤url参数-userId
+  if(_pageNumber !== '2'){
+    // 移除userId参数
+    delete _urlParam.userId;
+    var flag = false;
+    if(!$.isEmptyObject(_urlParam)){
+      for(var key in _urlParam){
+        // 第一次进入
+        if(!flag){
+          _newUrlParam += '?'+key+'='+_urlParam[key];
+          flag = true;
+        }else { 
+          _newUrlParam += '&'+key+'='+_urlParam[key];
+        }
+      }
+    }else {
+      _newUrlParam = '';
+    }
+  }else {
+    // 报名页面正常携带参数
+    _newUrlParam = window.location.search;
+  }
+
+  if (typeof _newUrlParam !== 'undefined' && _newUrlParam !== '') {
+      url = _base + "/ACTIVITY/view/" + _activityCode + "/" + _pageNumber + _newUrlParam + (_addParam !== undefined ? ('&' + _addParam) : '');
   } else {
       url = _base + "/ACTIVITY/view/" + _activityCode + "/" + _pageNumber + (_addParam !== undefined ? ('?' + _addParam) : '');
   }
@@ -90,6 +118,20 @@ function getQueryString(name) {
       return unescape(r[2]);
   }
   return null;
+}
+
+// 获取url所有参数
+function getRequest() {
+  var url = window.location.search; //获取url中"?"符后的字串
+  var theRequest = new Object();
+  if (url.indexOf("?") != -1) {
+    var str = url.substr(1);
+    strs = str.split("&");
+    for(var i = 0; i < strs.length; i ++) {
+      theRequest[strs[i].split("=")[0]] = unescape(strs[i].split("=")[1]);
+    }
+  }
+  return theRequest;
 }
 
 
@@ -300,6 +342,9 @@ function voteClickFn(params, successCallback, errorCallback){
   }
   gb_vote_loaded = true;
 
+  shareUserId = params.userId;
+  shareUserName  = params.userName;
+  
   $.ajax({
     type: 'PUT',
     url: baseUrl + '/ACTIVITY/sz/vote/' + activityCode,
@@ -357,6 +402,11 @@ function playerHasVoteDialogBind(){
   $('#html-template-4 .vote-btn-2').off("click").on('click',function(){
       $('#html-template-4').hide();
       $('#html-template-8').fadeIn();
+      // 设置分享参数
+      setWxShare({
+        userId: shareUserId,
+        userName: shareUserName
+      });
   });
 
   // 关闭按钮
@@ -376,6 +426,11 @@ function playerNoVoteDialogBind(){
   $('#html-template-5 .vote-btn-2').off("click").on('click',function(){
       $('#html-template-5').hide();
       $('#html-template-8').fadeIn();
+      // 设置分享参数
+      setWxShare({
+        userId: shareUserId,
+        userName: shareUserName
+      });
   });
 
   // 关闭按钮
@@ -395,6 +450,11 @@ function visitorHasVoteDialogBind(){
   $('#html-template-6 .vote-btn-2').off("click").on('click',function(){
       $('#html-template-6').hide();
       $('#html-template-8').fadeIn();
+      // 设置分享参数
+      setWxShare({
+        userId: shareUserId,
+        userName: shareUserName
+      });
   });
 
   // 关闭按钮
@@ -417,6 +477,11 @@ function visitorNoVoteDialogBind(){
   $('#html-template-7 .vote-btn-2').off("click").on('click',function(){
       $('#html-template-7').hide();
       $('#html-template-8').fadeIn();
+      // 设置分享参数
+      setWxShare({
+        userId: shareUserId,
+        userName: shareUserName
+      });
   });
 
   // 关闭按钮
@@ -440,4 +505,71 @@ function voteDialogBindFn() {
   visitorHasVoteDialogBind();
   visitorNoVoteDialogBind();
   voteShateDialogBind();
+}
+
+// 设置分享文案
+function setWxShare(data) {
+
+  var _userId = data.userId;
+  var _userName = data.userName;
+
+  wx.ready(function(){
+    // 获取域名
+    var _base = getBaseOrigin();
+    var _settings = rules.settings;
+
+    var shareData = {
+        title: _settings.szText.shareTitile,
+        imgUrl: _settings.szText.shareIcon,
+        desc: _settings.szText.shareSubtitle,
+        link: ""
+    }
+
+    var auth_id = getQueryString('auth_id');
+    auth_id = auth_id !== null ? '&auth_id='+auth_id : '';
+
+    // 被分享人
+    if (_userId !== '') {
+      shareData.title = _settings.szText.pullTitile;
+      shareData.desc = _settings.szText.pullSubtitle.replace("{{姓名}}", _userName);
+      shareData.link = _base + "/ACTIVITY/view/" + activityCode + "/3?activityCode="+activityCode+"&userId="+ _userId + auth_id;
+    }else {
+      // 分享首页
+      shareData.title = _settings.szText.shareTitile;
+      shareData.desc = _settings.szText.shareSubtitle;
+      shareData.link = _base + "/ACTIVITY/view/" + activityCode + "/1?activityCode="+activityCode+'&bindId='+getQueryString("bindId") + auth_id;
+    }
+
+    /**
+     *分享给朋友
+    */
+    wx.onMenuShareAppMessage({
+        title: shareData.title, // 分享标题
+        desc: shareData.desc, // 分享描述
+        link: shareData.link, // 分享链接
+        imgUrl: shareData.imgUrl, // 分享图标
+        type: 'link', // 分享类型,music、video或link，不填默认为link
+        dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
+        success: function () {
+            // 用户确认分享后执行的回调函数
+        },
+        cancel: function () {
+            // 用户取消分享后执行的回调函数
+        }
+    });
+    /**
+     *分享到朋友圈
+    */
+    wx.onMenuShareTimeline({
+        title: shareData.title, // 分享标题
+        desc: shareData.desc, // 分享描述
+        link: shareData.link, // 分享链接
+        imgUrl: shareData.imgUrl, // 分享图标
+        success: function () {
+        },
+        cancel: function () {
+            // 用户取消分享后执行的回调函数
+        }
+    });
+  });
 }

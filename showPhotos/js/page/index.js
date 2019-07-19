@@ -261,11 +261,13 @@ function getPlayerList(playerListData) {
             
             // 投票点击事件
             var cloneItem = $(item).clone();
-            cloneItem.find('.act-btn').attr('id',playerListData.records[i].id).on('click',function(){
+            cloneItem.find('.act-btn').attr('id',playerListData.records[i].id).attr('username',playerListData.records[i].name).on('click',function(){
                 var id = $(this).attr('id');
+                var userName = $(this).attr('username');
                 var _this = $(this)
                 var params = {
-                    userId: id
+                    userId: id,
+                    userName: userName
                 }
                 isAttention(function(){
                     // 投票

@@ -13,63 +13,6 @@ $(function(){
     voteDialogBindFn();
 });
 
-// 微信鉴权
-function wxpermission(userId,userName) {
-    wx.ready(function(){
-        var shareData = {
-            title: rules.settings.szText.shareTitile,
-            imgUrl: rules.settings.szText.shareIcon,
-            desc: rules.settings.szText.shareSubtitle,
-            link: ""
-        }
-    
-        // 已报名
-        if (user.status) {
-          shareData.title = rules.settings.szText.pullTitile;
-          shareData.desc = rules.settings.szText.pullSubtitle.replace("{{姓名}}", userName);
-          shareData.link = "/ACTIVITY/view/" + activityCode + "/3?userId="+userId;
-    
-        }else {
-          // 分享首页
-          shareData.title = rules.settings.szText.shareTitile;
-          shareData.desc = rules.settings.szText.shareSubtitle;
-          shareData.link = "/ACTIVITY/view/" + activityCode + "/1";
-        }
-    
-        /**
-         *分享给朋友
-        */
-        wx.onMenuShareAppMessage({
-            title: shareData.title, // 分享标题
-            desc: shareData.desc, // 分享描述
-            link: shareData.link, // 分享链接
-            imgUrl: shareData.imgUrl, // 分享图标
-            type: 'link', // 分享类型,music、video或link，不填默认为link
-            dataUrl: '', // 如果type是music或video，则要提供数据链接，默认为空
-            success: function () {
-                // 用户确认分享后执行的回调函数
-            },
-            cancel: function () {
-                // 用户取消分享后执行的回调函数
-            }
-        });
-        /**
-         *分享到朋友圈
-        */
-        wx.onMenuShareTimeline({
-            title: shareData.title, // 分享标题
-            desc: shareData.desc, // 分享描述
-            link: shareData.link, // 分享链接
-            imgUrl: shareData.imgUrl, // 分享图标
-            success: function () {
-            },
-            cancel: function () {
-                // 用户取消分享后执行的回调函数
-            }
-        });
-    });
-}
-
 // 元素点击事件绑定
 function btnBindClick() {
     // 返回首页
@@ -109,9 +52,11 @@ function btnBindClick() {
 
     // 给用户投票
     $("#act31119414834381").off("click").on("click", function(){
-        var _userId = getQueryString("userId");
+        var _userId = shareUserId;
+        var _userName = shareUserName;
         var params = {
-            userId: _userId
+            userId: _userId,
+            userName: _userName
         }
         isAttention(function(){
             voteClickFn(params, function(data){
@@ -181,8 +126,10 @@ function userTabInfo() {
                 $('#act3932189955 .userState').val(userInfoObj.declaration)
                 $('#act3932189955 .userState').attr('readOnly','readOnly')
                 $('#act3932189955 .show-pic').attr('src',userInfoObj.imageUrl);
+
+                shareUserId = userInfoObj.id;
+                shareUserName = userInfoObj.name;
             }
-            wxpermission(id,userInfoObj.name);
         },
         error: function() {
             $.dialog({
