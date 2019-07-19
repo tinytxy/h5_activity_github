@@ -22,7 +22,9 @@ function btnBindClick() {
     });
     // 拉票
     $('#act31119351441050').off("click").on("click",function(){
-        $('#html-template-8').fadeIn()
+        $('#html-template-8').fadeIn('normal', function() {
+            $(document).scrollTop(0);
+        });
     });
 
     // 排行榜
@@ -47,7 +49,9 @@ function btnBindClick() {
 
     // 活动秘籍    
     $("#act41613113951133").off("click").on("click", function(){
-        $('#html-template-8').fadeIn();
+        $('#html-template-8').fadeIn('normal', function() {
+          $(document).scrollTop(0);
+        });
     });
 
     // 给用户投票

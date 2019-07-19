@@ -154,7 +154,9 @@ function btnBindClick() {
 
     // 活动秘籍
     $("#act21650195017743").off("click").on("click", function(){
-        $('#html-template-8').fadeIn();
+        $('#html-template-8').fadeIn('normal', function() {
+            $(document).scrollTop(0);
+        });
     });
 }
 
