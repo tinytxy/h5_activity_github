@@ -38,6 +38,14 @@ function btnBindClick() {
                 var _t = getToken();
                 var urlParam = 'userId='+user.id;
                 transPage('3',activityCode,_t,urlParam);
+            },function(){
+                $.dialog({
+                    contentHtml: '<p style="text-align:center;">您还未报名，请到首页报名参加后本次活动！</p>',
+                    onClosed: function(){
+                        var _t = getToken();
+                        transPage('1',activityCode,_t);
+                    }
+                });
             });
         });
     });
