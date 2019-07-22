@@ -578,7 +578,7 @@ function setWxShare(data) {
     if (_userId !== '') {
       shareData.title = _settings.szText.pullTitile;
       shareData.desc = _settings.szText.pullSubtitle.replace("{{姓名}}", _userName);
-      shareData.link = _base + "/ACTIVITY/view/" + activityCode + "/3?activityCode="+activityCode+"&userId="+ _userId + auth_id;
+      shareData.link = _base + "/ACTIVITY/view/" + activityCode + "/3?activityCode="+activityCode+"&userId="+ _userId +'&bindId='+getQueryString("bindId") + auth_id;
     }else {
       // 分享首页
       shareData.title = _settings.szText.shareTitile;
