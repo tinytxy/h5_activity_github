@@ -57,6 +57,7 @@ function btnBindClick() {
     var uploadFile = ''
     // 上传图片
     $("#uploadImage").on('change', function () {
+        showLoading('上传中...');
         var formData = new FormData()
         formData.append('file', this.files[0])
         selectFileImage(this)
@@ -74,6 +75,7 @@ function btnBindClick() {
                     $("#uploadImage").parent().addClass('global-none-important')
                     $("#act31419345204861").removeClass('global-none')
                 }
+                hideLoading();
             },
             error: function () {
                 $.dialog({
@@ -81,6 +83,7 @@ function btnBindClick() {
                     autoClose : 3000,
                     infoText : '上传失败！'
                 }); 
+                hideLoading();
             }
         })
     })
