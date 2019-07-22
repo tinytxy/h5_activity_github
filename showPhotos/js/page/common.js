@@ -338,10 +338,10 @@ function getActivityTitle() {
 }
 
 // 加载loading
-function showLoading(){
+function showLoading(msg){
   $.dialog({
     type : 'info',
-    infoText : '加载中…',
+    infoText : msg ? msg : '加载中…',
     infoIcon : 'https://raw.githubusercontent.com/tinytxy/h5_activity_github/master/showPhotos/images/loading_2.gif',
     direction: '',
 	  align: 'center'
