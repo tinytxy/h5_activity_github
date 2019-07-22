@@ -7,7 +7,8 @@ $(function(){
     // 获取活动标题
     getActivityTitle();
     btnBindClick();// 绑定点击事件
-    var showTime = new Date(rules.acActivity.endTime).getTime() - new Date(currentTime).getTime()
+    
+    var showTime = new Date(rules.settings.szRule.votingEndTime).getTime() - new Date(currentTime).getTime()
     userCountDown(showTime/1000,$('#act31142119991744 span'));  //倒计时
     userTabInfo();
     voteDialogBindFn();
