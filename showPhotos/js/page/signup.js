@@ -54,48 +54,21 @@ function btnBindClick() {
         transPage('1',activityCode,_t);
     });
 
-    var uploadFile = ''
+    var uploadFile = '';
     // 上传图片
     $("#uploadImage").on('change', function () {
-
-        // 图片不能大于2M
-        var filesize = this.files[0].size / 1024 /1024;
-        if(filesize > 2) {
-            $.dialog({
-              contentHtml : '<p style="text-align:center;">上传文件大小不能超过 2MB!</p>'
+        var _file = this.files[0];
+        // 图片大于1M压缩
+        var filesize = _file.size / 1024 /1024;
+        if(filesize > 1) {
+            compressImage(_file, function(blob){
+               // blob转file
+               var newFile = blobTransferFile(blob);
+                uploadFileFn(newFile);
             });
-            return false
+        }else {
+            uploadFileFn(_file);
         }
-
-        showLoading('上传中...');
-        var formData = new FormData()
-        formData.append('file', this.files[0])
-        selectFileImage(this)
-        $.ajax({
-            type: 'POST',
-            url: manageUrl + '/system/components/upload',
-            // headers: { 'x-token': 'admin.725.eb96823d6eba412fbec37f3a259801b2' },
-            data: formData,
-            contentType: false,
-            processData: false,
-            success: function (data) {
-                var data = typeof data == 'string' ? JSON.parse(data) : data
-                if(data.code == 200){
-                    uploadFile = data.records.fileUrl
-                    $("#uploadImage").parent().addClass('global-none-important')
-                    $("#act31419345204861").removeClass('global-none')
-                }
-                hideLoading();
-            },
-            error: function () {
-                $.dialog({
-                    type : 'tips',
-                    autoClose : 3000,
-                    infoText : '上传失败！'
-                }); 
-                hideLoading();
-            }
-        })
     })
 
     $('#act31419345204861').on('click',function() {
@@ -175,7 +148,7 @@ function btnBindClick() {
 }
 
 function selectFileImage(fileObj) {
-    var file = fileObj.files['0'];
+    var file = fileObj;
     //图片方向角 added by lzk  
     var Orientation = null;
 
@@ -548,4 +521,61 @@ function validateForm() {
      }
    }
    return flag
+}
+
+// blob转file
+function blobTransferFile(_blob) {
+    let _name = (new Date().getTime());
+    const _type = _blob.type
+    let file = new window.File([_blob], _name, { type: _type })
+    if (_type === 'image/svg+xml') {
+        _name += '.svg'
+        file = new window.File([_blob], _name, { type: _type })
+    } else if (_type === 'image/gif') {
+        _name += '.gif'
+        file = new window.File([_blob], _name, { type: _type })
+    } else if (_type === 'image/jpeg') {
+        _name += '.jpg'
+        file = new window.File([_blob], _name, { type: _type })
+    } else if (_type === 'image/png') {
+        _name += '.png'
+        file = new window.File([_blob], _name, { type: _type })
+    } else {
+        file = _blob
+    }
+
+    return file;
+}
+
+// 文件上传
+function uploadFileFn(file) {
+
+    showLoading('上传中...');
+    var formData = new FormData();
+    formData.append('file', file)
+    selectFileImage(file)
+    $.ajax({
+        type: 'POST',
+        url: manageUrl + '/system/components/upload',
+        data: formData,
+        contentType: false,
+        processData: false,
+        success: function (data) {
+            var data = typeof data == 'string' ? JSON.parse(data) : data
+            if(data.code == 200){
+                uploadFile = data.records.fileUrl
+                $("#uploadImage").parent().addClass('global-none-important')
+                $("#act31419345204861").removeClass('global-none')
+            }
+            hideLoading();
+        },
+        error: function () {
+            $.dialog({
+                type : 'tips',
+                autoClose : 3000,
+                infoText : '上传失败！'
+            }); 
+            hideLoading();
+        }
+    })
 }
