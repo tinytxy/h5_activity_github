@@ -57,6 +57,16 @@ function btnBindClick() {
     var uploadFile = ''
     // 上传图片
     $("#uploadImage").on('change', function () {
+
+        // 图片不能大于2M
+        var filesize = this.files[0].size / 1024 /1024;
+        if(filesize > 2) {
+            $.dialog({
+              contentHtml : '<p style="text-align:center;">上传文件大小不能超过 2MB!</p>'
+            });
+            return false
+        }
+
         showLoading('上传中...');
         var formData = new FormData()
         formData.append('file', this.files[0])
