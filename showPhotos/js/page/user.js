@@ -147,6 +147,28 @@ function userTabInfo() {
 
                 shareUserId = userInfoObj.id;
                 shareUserName = userInfoObj.name;
+
+                // 创建新增项
+                var addStr = '';
+                var inputStr = '<div class="form-row m-b">'+
+                                    '<div class="form-input-group">'+
+                                        '<div class="form-input-group-inner">'+
+                                            '<input type="text" c_remove="readonly" readonly="readOnly" value="{{value}}">'+
+                                        '</div>'+
+                                    '</div>'+
+                                '</div>';
+                if(userInfoObj.x1 !== ''){
+                    addStr += inputStr.replace(/{{value}}/g,userInfoObj.x1);
+                }
+                if(userInfoObj.x2 !== ''){
+                    addStr += inputStr.replace(/{{value}}/g,userInfoObj.x2);
+                }
+                if(userInfoObj.x3 !== ''){
+                    addStr += inputStr.replace(/{{value}}/g,userInfoObj.x3);
+                }
+                if(addStr !== ''){
+                    $("#act3932189955 .form-row:last-child").prepend(addStr);
+                }
             }
         },
         error: function() {
