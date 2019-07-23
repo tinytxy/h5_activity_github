@@ -1,4 +1,6 @@
 
+var uploadFile = '';
+
 // 加载html结构
 loadHtmlJson();
 
@@ -62,7 +64,7 @@ function btnBindClick() {
         transPage('1',activityCode,_t);
     });
 
-    var uploadFile = '';
+    
     // 上传图片
     $("#uploadImage").on('change', function () {
         var _file = this.files[0];
