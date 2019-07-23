@@ -11,24 +11,16 @@ $(function(){
     getActivityTitle();
     btnBindClick();// 绑定点击事件
     removeAttr();
-    getAjaxListSearch('player',1,function(playerListData){
-        getPlayerList(playerListData);
-        // 打开排行榜
-        if(getQueryString("toRanger") === '1') {
-            $("#act3152823482970").click();
-        }else {
-            $("#act31528123692525").click();
-        }
-    });  // 参赛选手列表
-    getAjaxListSearch('rank',1,function(rankListData){
-        getRangeList(rankListData);
-        // 打开排行榜
-        if(getQueryString("toRanger") === '1') {
-            $("#act3152823482970").click();
-        }else {
-            $("#act31528123692525").click();
-        }
-    }); // 排行榜列表
+    
+    // 切换到排行榜
+    if(getQueryString("toRanger") === '1') {
+      $("#act3152823482970").click();
+    }else {
+      // 切换到参赛选手
+      $("#act31528123692525").click();
+    }
+    
+    // 排行榜列表
     voteDialogBindFn();
 });
 
