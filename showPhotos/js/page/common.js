@@ -95,18 +95,6 @@ function transPage(_pageNumber, _activityCode, _token, _addParam) {
   } else {
       url = _base + "/ACTIVITY/view/" + _activityCode + "/" + _pageNumber + (_addParam !== undefined ? ('?' + _addParam) : '');
   }
-
-  // var _form = document.createElement('form');
-  // _form.action = url;
-  // _form.method = "post";
-  // _form.style.display = "none";
-
-  // var inputToken = document.createElement('input');
-  // inputToken.value = _token;
-  // inputToken.name = 'x-token';
-  // _form.appendChild(inputToken);
-  // document.body.appendChild(_form);
-  // _form.submit();
   window.location.href = url;
 }
 
