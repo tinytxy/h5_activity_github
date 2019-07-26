@@ -95,6 +95,18 @@ function transPage(_pageNumber, _activityCode, _token, _addParam) {
   } else {
       url = _base + "/ACTIVITY/view/" + _activityCode + "/" + _pageNumber + (_addParam !== undefined ? ('?' + _addParam) : '');
   }
+
+  // var _form = document.createElement('form');
+  // _form.action = url;
+  // _form.method = "post";
+  // _form.style.display = "none";
+
+  // var inputToken = document.createElement('input');
+  // inputToken.value = _token;
+  // inputToken.name = 'x-token';
+  // _form.appendChild(inputToken);
+  // document.body.appendChild(_form);
+  // _form.submit();
   window.location.href = url;
 }
 
@@ -336,8 +348,8 @@ function showLoading(msg){
   });
 }
 // 关闭loading
-function hideLoading() {
-  $.dialog.close();
+function hideLoading(callback) {
+  $.dialog.close(callback);
 }
 
 /* ***********************弹出框控制全部逻辑************************** */
@@ -360,7 +372,7 @@ function voteClickFn(params, successCallback, errorCallback){
         'x-token': getToken()
     },
     success: function(data) {
-        hideLoading();
+        
         if(data.status == 200) {
           // 已报名-通过审核
           if(user.reviewStatus === 1) {
@@ -375,6 +387,7 @@ function voteClickFn(params, successCallback, errorCallback){
             });
           }
           successCallback && successCallback(data); 
+          hideLoading();
         }else if(data.status == 201) {
           // 已报名-通过审核
           if(user.reviewStatus === 1) {
@@ -389,20 +402,26 @@ function voteClickFn(params, successCallback, errorCallback){
             });
           }
           errorCallback && errorCallback(data); 
+          hideLoading();
         }else {
+
+          hideLoading(function(){
             // 异常处理
             $.dialog({
-                contentHtml : '<p style="text-align:center;">'+ data.message +'</p>'
+              contentHtml : '<p style="text-align:center;">'+ data.message +'</p>'
             });
+          });
         }
         gb_vote_loaded = false;
     },
     error: function(data){
-        hideLoading();
-        // 异常处理
-        $.dialog({
+        hideLoading(function(){
+          // 异常处理
+          $.dialog({
             contentHtml : '<p style="text-align:center;">'+ data.responseJSON.message +'</p>'
+          });
         });
+                
         gb_vote_loaded = false;
     }
   });

@@ -254,7 +254,7 @@
     };
 
 
-    $.dialog.close = function(){
+    $.dialog.close = function(callback){
         settings.onBeforeClosed();
 
         dialogWrapper.removeClass('dialog-wrap-show');
@@ -271,6 +271,7 @@
         // 解决touchend点透，延迟阻止点透层隐藏
         setTimeout(function(){
             solveTapBug.remove();
+            callback && callback();
         }, 350);
     };
 

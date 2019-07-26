@@ -280,8 +280,9 @@ function getPlayerList(playerListData) {
                     userId: id,
                     userName: userName
                 }
-                showLoading('处理中...');
+                
                 isAttention(function(){
+                    showLoading('处理中...');
                     // 投票
                     voteClickFn(params,function(data){
                         // success
