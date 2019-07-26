@@ -280,11 +280,12 @@ function getPlayerList(playerListData) {
                     userId: id,
                     userName: userName
                 }
+                showLoading('处理中...');
                 isAttention(function(){
                     // 投票
                     voteClickFn(params,function(data){
                         // success
-                        _this.parent('.item-title').prev().find('.vote-num').text(data.result.voteNum + '票')
+                        _this.parent('.item-title').prev().find('.vote-num').text(data.result.voteNum + '票');
                     });
                 });
             });

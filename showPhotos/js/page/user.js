@@ -76,6 +76,7 @@ function btnBindClick() {
             userId: _userId,
             userName: _userName
         }
+        showLoading('处理中...');
         isAttention(function(){
             voteClickFn(params, function(data){
                 $('#act3932189955 .userVoteNum span').text(data.result.voteNum);

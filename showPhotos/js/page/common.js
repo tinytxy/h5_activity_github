@@ -407,6 +407,7 @@ function voteClickFn(params, successCallback, errorCallback){
             });
         }
         gb_vote_loaded = false;
+        hideLoading();
     },
     error: function(data){
         // 异常处理
@@ -414,6 +415,7 @@ function voteClickFn(params, successCallback, errorCallback){
             contentHtml : '<p style="text-align:center;">'+ data.responseJSON.message +'</p>'
         });
         gb_vote_loaded = false;
+        hideLoading();
     }
   });
 }
