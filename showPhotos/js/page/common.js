@@ -372,6 +372,7 @@ function voteClickFn(params, successCallback, errorCallback){
         'x-token': getToken()
     },
     success: function(data) {
+        hideLoading();
         if(data.status == 200) {
           // 已报名-通过审核
           if(user.reviewStatus === 1) {
@@ -407,15 +408,14 @@ function voteClickFn(params, successCallback, errorCallback){
             });
         }
         gb_vote_loaded = false;
-        hideLoading();
     },
     error: function(data){
+        hideLoading();
         // 异常处理
         $.dialog({
             contentHtml : '<p style="text-align:center;">'+ data.responseJSON.message +'</p>'
         });
         gb_vote_loaded = false;
-        hideLoading();
     }
   });
 }
