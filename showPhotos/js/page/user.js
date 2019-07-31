@@ -74,7 +74,8 @@ function btnBindClick() {
         var _userName = shareUserName;
         var params = {
             userId: _userId,
-            userName: _userName
+            userName: _userName,
+            bindId: getQueryString('bindId') !== null ? getQueryString('bindId') : ''
         }
         
         isAttention(function(){

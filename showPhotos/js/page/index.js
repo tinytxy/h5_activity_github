@@ -278,7 +278,8 @@ function getPlayerList(playerListData) {
                 var _this = $(this)
                 var params = {
                     userId: id,
-                    userName: userName
+                    userName: userName,
+                    bindId: getQueryString('bindId') !== null ? getQueryString('bindId') : ''
                 }
                 
                 isAttention(function(){
