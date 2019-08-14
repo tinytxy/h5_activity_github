@@ -149,8 +149,9 @@ function loadHtmlJson() {
 
 // 获取机构名称
 function getOrgNameFn(callback) {
-  var signupId = getQueryString('orgId')
-  var orgId = orgIdFn(signupId).orgId
+  // var signupId = getQueryString('orgId')
+  // var orgId = orgIdFn(signupId).orgId
+  var orgId = getQueryString('orgId')
   $.ajax({
       type: 'GET',
       url: baseUrl + '/ORG/hospital/community/hospitalInfo/' + orgId,
