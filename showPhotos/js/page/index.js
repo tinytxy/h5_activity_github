@@ -279,7 +279,7 @@ function getPlayerList(playerListData) {
                 var params = {
                     userId: id,
                     userName: userName,
-                    bindId: getQueryString('bindId') !== null ? getQueryString('bindId') : ''
+                    orgId: getQueryString('orgId') !== null ? getQueryString('orgId') : ''
                 }
                 
                 isAttention(function(){

@@ -75,7 +75,7 @@ function btnBindClick() {
         var params = {
             userId: _userId,
             userName: _userName,
-            bindId: getQueryString('bindId') !== null ? getQueryString('bindId') : ''
+            orgId: getQueryString('orgId') !== null ? getQueryString('orgId') : ''
         }
         
         isAttention(function(){

@@ -149,7 +149,7 @@ function loadHtmlJson() {
 
 // 获取机构名称
 function getOrgNameFn(callback) {
-  var signupId = getQueryString('bindId')
+  var signupId = getQueryString('orgId')
   var orgId = orgIdFn(signupId).orgId
   $.ajax({
       type: 'GET',
@@ -174,12 +174,12 @@ function getOrgNameFn(callback) {
 
 // 关注弹出框
 function appendAttentionDialog() {
-  var bindId = getQueryString("bindId");
+  var orgId = getQueryString("orgId");
   var orgQrCode = '';
   var orgId = '';
 
   for(var k = 0; k < rules.acActivityOrgs.length; k++){
-    if(rules.acActivityOrgs[k].id == bindId){
+    if(rules.acActivityOrgs[k].orgId == orgId){
       orgId = rules.acActivityOrgs[k].orgId;
       orgQrCode = rules.acActivityOrgs[k].qrCodeUrl;
       break;
@@ -587,12 +587,12 @@ function setWxShare(data) {
     if (_userId !== '') {
       shareData.title = _settings.szText.pullTitile;
       shareData.desc = _settings.szText.pullSubtitle.replace("{{姓名}}", _userName);
-      shareData.link = _base + "/ACTIVITY/view/" + activityCode + "/3?activityCode="+activityCode+"&userId="+ _userId +'&bindId='+getQueryString("bindId") + auth_id;
+      shareData.link = _base + "/ACTIVITY/view/" + activityCode + "/3?activityCode="+activityCode+"&userId="+ _userId +'&orgId='+getQueryString("orgId") + auth_id;
     }else {
       // 分享首页
       shareData.title = _settings.szText.shareTitile;
       shareData.desc = _settings.szText.shareSubtitle;
-      shareData.link = _base + "/ACTIVITY/view/" + activityCode + "/1?activityCode="+activityCode+'&bindId='+getQueryString("bindId") + auth_id;
+      shareData.link = _base + "/ACTIVITY/view/" + activityCode + "/1?activityCode="+activityCode+'&orgId='+getQueryString("orgId") + auth_id;
     }
 
     /**

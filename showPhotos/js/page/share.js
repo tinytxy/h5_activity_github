@@ -31,12 +31,12 @@ wx.ready(function(){
     if (user.reviewStatus === 1) {
       shareData.title = _settings.szText.pullTitile;
       shareData.desc = _settings.szText.pullSubtitle.replace("{{姓名}}", user.name);
-      shareData.link = _base + "/ACTIVITY/view/" + activityCode + "/3?activityCode="+activityCode+'&bindId='+getQueryString("bindId") + "&userId="+ user.id + auth_id;
+      shareData.link = _base + "/ACTIVITY/view/" + activityCode + "/3?activityCode="+activityCode+'&orgId='+getQueryString("orgId") + "&userId="+ user.id + auth_id;
     }else {
       // 分享首页
       shareData.title = _settings.szText.shareTitile;
       shareData.desc = _settings.szText.shareSubtitle;
-      shareData.link = _base + "/ACTIVITY/view/" + activityCode + "/1?activityCode="+activityCode+'&bindId='+getQueryString("bindId") + auth_id;
+      shareData.link = _base + "/ACTIVITY/view/" + activityCode + "/1?activityCode="+activityCode+'&orgId='+getQueryString("orgId") + auth_id;
     }
 
     /**

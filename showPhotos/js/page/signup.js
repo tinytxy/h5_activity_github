@@ -110,10 +110,11 @@ function btnBindClick() {
             });
             return false
         }
-        var signupId = getQueryString('bindId')
-        var orgId = orgIdFn(signupId).orgId
+        // var signupId = getQueryString('bindId')
+        // var orgId = orgIdFn(signupId).orgId
+        var orgId = getQueryString('orgId')
         var params = {
-            kgAcActivityOrgId: signupId,      //模板变量中获取，机构id
+            orgId: orgId,      //模板变量中获取，机构id
             declaration: introDuce.val(),   //参赛宣言
             imageUrl: uploadFile,  //上传图片地址
             name: userName.val(),  // 姓名
