@@ -177,7 +177,6 @@ function getOrgNameFn(callback) {
 function appendAttentionDialog() {
   var orgId = getQueryString("orgId");
   var orgQrCode = '';
-  var orgId = '';
 
   for(var k = 0; k < rules.acActivityOrgs.length; k++){
     if(rules.acActivityOrgs[k].orgId == orgId){
