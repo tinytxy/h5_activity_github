@@ -2,7 +2,12 @@
 var uploadFile = '';
 
 // 加载html结构
-loadHtmlJson();
+loadHtmlJson(function(){
+    // 判断是否需要移除机构名称
+    if(rules.acActivityOrgs.length === 0) {
+      $("#act11739232574395").parents(".form-row.m-b").remove();
+    }
+});
 
 $(function () {
     setToken();
@@ -112,7 +117,8 @@ function btnBindClick() {
         }
         // var signupId = getQueryString('bindId')
         // var orgId = orgIdFn(signupId).orgId
-        var orgId = getQueryString('orgId')
+        // 当前不需要机构名称
+        var orgId = rules.acActivityOrgs.length > 0 ? getQueryString('orgId') : null
         var params = {
             orgId: orgId,      //模板变量中获取，机构id
             declaration: introDuce.val(),   //参赛宣言
@@ -120,6 +126,10 @@ function btnBindClick() {
             name: userName.val(),  // 姓名
             userPhone: phonenum.val(),   //用户填写的手机号
         }
+
+        // 移除orgId
+        orgId === null ? delete params.orgId : ''
+
         if (addInput.length) {
             for (var i = 0; i < addInput.length; i++) {
                 params['x'+ (i+1)] = $('#'+addInput[i].id).val()

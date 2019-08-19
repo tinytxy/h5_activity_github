@@ -136,7 +136,7 @@ function getRequest() {
 
 
 // 加载HTML结构
-function loadHtmlJson() {
+function loadHtmlJson(callback) {
   $('body').prepend(json2html(data.htmlJson));
   var _relationship = JSON.parse(data.relationship);
   for(var i=0;i<_relationship.childs.length;i++) {
@@ -145,12 +145,19 @@ function loadHtmlJson() {
       $('body').prepend(json2html(JSON.parse(data[_page].htmlJson)));
       $('#html-template-'+_pageNumber).addClass('global-none')
   }
+  callback && callback()
 }
 
 // 获取机构名称
 function getOrgNameFn(callback) {
   // var signupId = getQueryString('orgId')
   // var orgId = orgIdFn(signupId).orgId
+
+  // 判断是否需要机构名称
+  if(rules.acActivityOrgs.length === 0) {
+    return
+  }
+
   var orgId = getQueryString('orgId')
   $.ajax({
       type: 'GET',

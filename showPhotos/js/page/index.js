@@ -266,7 +266,12 @@ function getPlayerList(playerListData) {
             // 名称替换
             $('.user-name',item).text(playerListData.records[i].name);
             // 机构名称替换
-            $('.vote-struct',item).text(playerListData.records[i].orgName);
+            if(rules.acActivityOrgs.length === 0){
+              $('.vote-struct',item).remove();
+            }else {
+              $('.vote-struct',item).text(playerListData.records[i].orgName);
+            }
+            
             // 票数替换
             $('.vote-num',item).text(playerListData.records[i].voteNum+'票');
             
