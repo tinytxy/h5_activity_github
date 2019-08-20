@@ -8,8 +8,9 @@ $(function(){
     getActivityTitle();
     btnBindClick();// 绑定点击事件
     
-    var showTime = new Date(rules.settings.szRule.votingEndTime).getTime() - new Date(currentTime).getTime()
-    userCountDown(showTime/1000,$('#act31142119991744 span'));  //倒计时
+    var showTime = new Date(rules.settings.szRule.votingEndTime).getTime() - new Date(currentTime).getTime();
+    var endTime = new Date(rules.acActivity.endTime).getTime() - new Date(currentTime).getTime();
+    userCountDown(showTime/1000, endTime, $('#act31142119991744 span'));  //倒计时
     userTabInfo();
     voteDialogBindFn();
 });
@@ -87,13 +88,14 @@ function btnBindClick() {
     });
 }
 // 倒计时
-function userCountDown(times,ids){
+function userCountDown(times, endTime ,ids){
     var $countDown = $('#act31142119991744')
     if($countDown.attr('c_counttime') == 'yes') {
         $countDown.removeClass('global-none')
         var timer=null;
         var self = this
         var times = times
+        var endTimes = endTime
           timer=setInterval(function(){
             var day=0,
               hour=0,
@@ -111,10 +113,19 @@ function userCountDown(times,ids){
             if (second <= 9) second = '0' + second;
             ids.html((day != 00 ? day + "天" : '')+hour+"时"+minute+"分"+second+"秒")
             times--;
-            if(times<0){
+            endTimes--;
+            // 判断活动时间是否结束
+            if(endTimes < 0) {
+                clearInterval(timer);
+                // ids.parent().addClass('global-none');
+                ids.parent().html('活动已结束');
+            }
+            // 判断投票时间是否结束
+            else if(times < 0){
                 clearInterval(timer);
-                ids.parent().addClass('global-none')
-              }
+                // ids.parent().addClass('global-none');
+                ids.parent().html('活动已结束');
+            }
           },1000);
     }else {
         $countDown.addClass('global-none')

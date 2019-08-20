@@ -2,7 +2,7 @@
 // 公共变量
 var activityCode = typeof rules !== 'undefined' ? rules.acActivity.code : '';
 var baseUrl = "https://space-api.check.icaremgt.com";
-var manageUrl = "https://api-admin-manage.check.icaremgt.com";
+var manageUrl = "https://test.icareyou.net";
 
 // 防止投票连点
 var gb_vote_loaded = false

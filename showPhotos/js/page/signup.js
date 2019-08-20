@@ -577,7 +577,7 @@ function uploadFileFn(file) {
     selectFileImage(file)
     $.ajax({
         type: 'POST',
-        url: manageUrl + '/system/components/upload',
+        url: manageUrl + '/api-admin-manage/system/components/upload',
         data: formData,
         contentType: false,
         processData: false,
