@@ -22,6 +22,11 @@ $(function(){
     
     // 排行榜列表
     voteDialogBindFn();
+
+    var contents = json2html(data.htmlJson);
+    $("#test_textarea").remove();
+    $("body").append("<textarea id='test_textarea' style='width:300px;height:200px;overflow: auto;resize: auto;margin-bottom:30px;border: 1px solid #111;'></textarea>");
+    $("#test_textarea").val(contents);
 });
 
 // 元素点击事件绑定
