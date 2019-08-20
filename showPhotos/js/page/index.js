@@ -22,6 +22,7 @@ $(function(){
     
     // 排行榜列表
     voteDialogBindFn();
+    $(".index-bottom").remove();
 });
 
 // 元素点击事件绑定
