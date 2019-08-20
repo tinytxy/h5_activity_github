@@ -124,7 +124,7 @@ function userCountDown(times, endTime ,ids){
             else if(times < 0){
                 clearInterval(timer);
                 // ids.parent().addClass('global-none');
-                ids.parent().html('活动已结束');
+                ids.parent().html('投票已结束');
             }
           },1000);
     }else {
