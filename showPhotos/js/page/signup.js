@@ -63,7 +63,7 @@ function btnBindClick() {
     });
 
     // 客服二维码弹框
-    $("body").on('click', '#html-template-9 .modal-close', function () {
+    $("#html-template-9 .modal-close").off("click").on('click', function () {
         var _t = getToken();
         $('#html-template-9').addClass('global-none')
         transPage('1',activityCode,_t);
