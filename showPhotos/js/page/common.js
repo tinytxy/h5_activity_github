@@ -325,6 +325,7 @@ function getActivityTitle() {
             var title = data.result.settings.szText.h5Title;
             document.title = title;
 
+            // JS动态修改微信浏览器中的title
             var $body = $('body');
             var $iframe = $('<iframe src="" style="display:none;"></iframe>');
             $iframe.on('load',function() {
