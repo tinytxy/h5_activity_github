@@ -325,13 +325,13 @@ function getActivityTitle() {
             var title = data.result.settings.szText.h5Title;
             document.title = title;
 
-            var $body = $('body');
-            var $iframe = $('<iframe src=""></iframe>');
-            $iframe.on('load',function() {
-              setTimeout(function() {
-                  $iframe.off('load').remove();
-              }, 0);
-            }).appendTo($body);
+            // var $body = $('body');
+            // var $iframe = $('<iframe src=""></iframe>');
+            // $iframe.on('load',function() {
+            //   setTimeout(function() {
+            //       $iframe.off('load').remove();
+            //   }, 0);
+            // }).appendTo($body);
           }
       },
       error: function() {
