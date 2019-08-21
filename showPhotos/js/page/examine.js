@@ -4,6 +4,14 @@ $(document).ready(function(){
   userTabInfo();
   // 获取活动名称
   getActivityTitle();
+  // 判断活动是否结束
+  if( typeof rules !== 'undefined' ) {
+    var endTime = new Date(rules.acActivity.endTime).getTime() - new Date(currentTime).getTime();
+    if(endTime/1000 < 0 ) {
+      $(".edit-btn").addClass("hide");
+      $(".status-msg").addClass("text-danger").html("活动已结束！"); 
+    }
+  }
 });
 
 function pass(){
