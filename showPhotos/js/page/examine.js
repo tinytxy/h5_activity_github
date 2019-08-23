@@ -35,7 +35,7 @@ function pass(){
               type: "alert",
               contentHtml: "<p style='text-align:center;'>操作成功</p>",
               onClosed: function(){
-                window.location.reload()
+                window.location.href = location.href+'?time='+((new Date()).getTime());
               }
             });
         }
@@ -71,7 +71,7 @@ function refuse(){
               type: "alert",
               contentHtml: "<p style='text-align:center;'>操作成功</p>",
               onClosed: function(){
-                window.location.reload()
+                window.location.href = location.href+'?time='+((new Date()).getTime());
               }
             });
         }
