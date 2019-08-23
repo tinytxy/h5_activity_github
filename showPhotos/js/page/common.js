@@ -1,8 +1,8 @@
 
 // 公共变量
 var activityCode = typeof rules !== 'undefined' ? rules.acActivity.code : '';
-var baseUrl = "https://space-api.check.icaremgt.com";
-var manageUrl = "https://test.icareyou.net";
+var baseUrl = window.location.href.indexOf("test") > 0 ? "https://space-api.check.icaremgt.com" : "http://space-api.icaremgt.com";
+var manageUrl = window.location.href.indexOf("test") > 0 ? "https://test.icareyou.net" : "http://www.icareyou.net";
 
 // 防止投票连点
 var gb_vote_loaded = false
