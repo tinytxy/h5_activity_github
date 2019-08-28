@@ -449,7 +449,7 @@ function validateUserName(userName) {
     let state = false
     if (userName !== '') {
         let uName = userName.replace(/\s*/g, '')
-        var reg = /^(([a-zA-Z+\.?\·?a-zA-Z+]{1,15}$)|([\u4e00-\u9fa5+\·?\u4e00-\u9fa5+]{1,15}$))/
+        var reg = /^(([a-zA-Z+\.?\·?a-zA-Z+]{1,15}$)|([\u4e00-\u9fa5+\·?\u4e00-\u9fa5+]{1,15}$)|([^\x00-\xff]))/
         if (!reg.test(uName)) {
             state = false
         } else {

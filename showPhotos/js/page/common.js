@@ -180,9 +180,9 @@ function getOrgNameFn(callback) {
   })
 }
 
-// 关注弹出框
-function appendAttentionDialog() {
+function showQrcode(callback) {
   var orgId = getQueryString("orgId");
+  var activityCode = getQueryString("activityCode");
   var orgQrCode = '';
 
   for(var k = 0; k < rules.acActivityOrgs.length; k++){
@@ -193,50 +193,84 @@ function appendAttentionDialog() {
     }
   }
 
-  var str = '<section id="html-container-attention" style="display: none;">'+
-              '<div>'+
-                '<div class="c-modal-wrap">'+
-                  '<div class="mshe-mask"></div> '+
-                  '<div class="c-modal">'+
-                    '<div class="modal-dialog">'+
-                      '<div c_type="dialog" c_typename="dialog_playerVote1" class="modal-content" style="background: rgb(255, 255, 255);">'+
-                      '<div class="modal-header">'+
-                        '<img src="http://qnfile.icareyou.net/363a344aa7424d219a5fc86eff7265751561343712294.jpg" class="header-pic">'+
-                      '</div>'+ 
-                      '<div class="modal-body">'+
-                        '<p class="struct">长按关注后继续活动</p>'+
-                        '<div>'+
-                          '<img src="'+ orgQrCode +'" alt="" style="width: 100%;">'+
-                        '</div>'+
-                      '</div>'+
-                      '<div class="modal-close">'+
-                        '<img src="http://qnfile.icareyou.net/ddae57885c424abdb13d37c78038c6a01561343787282.jpg">'+
-                      '</div>'+
-                      '</div>'+
-                    '</div>'+
-                  '</div>'+
+  if(orgQrCode == '') {
+    var baseurlCode = orgId ? (baseUrl + '/ACTIVITY/' + activityCode + '/qr-code-url?orgId=' + orgId) : (baseUrl + '/ACTIVITY/' + activityCode + '/qr-code-url')
+      $.ajax({
+        type: 'GET',
+        url: baseurlCode,
+        headers: {
+            'x-token': getToken()
+        },
+        success: function(data) {
+            if(data.status == 200) {
+              orgQrCode = data.result.qrCodeUrl
+              callback && callback(orgQrCode)
+            }
+        },
+        error: function(data) {
+            $.dialog({
+              type : 'tips',
+              autoClose : 3000,
+              infoText : data.responseJSON.message
+          });
+        }
+    })
+  }else {
+    callback && callback(orgQrCode)
+  }
+}
+
+// 关注弹出框
+function appendAttentionDialog() {
+  showQrcode(function(orgQrCode){
+    var str = '<section id="html-container-attention" style="display: none;">'+
+      '<div>'+
+        '<div class="c-modal-wrap">'+
+          '<div class="mshe-mask"></div> '+
+          '<div class="c-modal">'+
+            '<div class="modal-dialog">'+
+              '<div c_type="dialog" c_typename="dialog_playerVote1" class="modal-content" style="background: rgb(255, 255, 255);">'+
+              '<div class="modal-header">'+
+                '<img src="http://qnfile.icareyou.net/363a344aa7424d219a5fc86eff7265751561343712294.jpg" class="header-pic">'+
+              '</div>'+ 
+              '<div class="modal-body">'+
+                '<p class="struct">长按关注后继续活动</p>'+
+                '<div>'+
+                  '<img src="'+ orgQrCode +'" alt="" style="width: 100%;">'+
                 '</div>'+
               '</div>'+
-            '</section>';
+              '<div class="modal-close">'+
+                '<img src="http://qnfile.icareyou.net/ddae57885c424abdb13d37c78038c6a01561343787282.jpg">'+
+              '</div>'+
+              '</div>'+
+            '</div>'+
+          '</div>'+
+        '</div>'+
+      '</div>'+
+    '</section>';
 
-  $('body').prepend(str);
-  // 事件绑定
-  $("#html-container-attention .modal-close").off("click").on("click", function(){
-    $("#html-container-attention").fadeOut();
-  });
+    $('body').prepend(str);
 
-  // 获取机构名称
-  getOrgNameFn(function(data){
-    var orgName = '长按关注'+  data.records.orgName +'后继续活动';
-    $('#html-container-attention .modal-body .struct').text(orgName);
-  });
-
-  // 未关注过默认显示弹出框  
-  if (!user.attention){
-    $("#html-container-attention").fadeIn('normal', function() {
-      // $(document).scrollTop(0);
+     // 事件绑定
+    $("#html-container-attention .modal-close").off("click").on("click", function(){
+      $("#html-container-attention").fadeOut();
     });
-  }
+
+    // 获取机构名称
+    getOrgNameFn(function(data){
+      var orgName = '长按关注'+  data.records.orgName +'后继续活动';
+      $('#html-container-attention .modal-body .struct').text(orgName);
+    });
+
+    // 未关注过默认显示弹出框  
+    if (!user.attention){
+      $("#html-container-attention").fadeIn('normal', function() {
+        // $(document).scrollTop(0);
+      });
+    }
+    
+  })
+   
 }
 
 // 显示强关弹出框
