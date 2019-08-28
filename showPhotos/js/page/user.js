@@ -10,7 +10,7 @@ $(function(){
     
     var showTime = new Date(rules.settings.szRule.votingEndTime).getTime() - new Date(currentTime).getTime();
     var endTime = new Date(rules.acActivity.endTime).getTime() - new Date(currentTime).getTime();
-    userCountDown(showTime/1000, endTime, $('#act31142119991744 span'));  //倒计时
+    userCountDown(showTime/1000, endTime/1000, $('#act31142119991744 span'));  //倒计时
     userTabInfo();
     voteDialogBindFn();
 });
