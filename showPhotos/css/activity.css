@@ -175,6 +175,9 @@ body {
 .container .content .tab-list li img {
   width: 1.84rem;
 }
+.template2 .container .content .tab-list li img {
+  width: 3rem;
+}
 .container .content .user-list {
   background-color: #f4b2b1;
   padding: 4%;
