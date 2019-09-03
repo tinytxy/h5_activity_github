@@ -149,7 +149,7 @@ body {
   height: .63rem;
   display: block;
 }
-.template2 .container .return-back {
+.template2.container .return-back {
   position: absolute;
   top: .1rem;
   right: .1rem;
@@ -183,7 +183,7 @@ body {
 .container .content .tab-list li img {
   width: 1.84rem;
 }
-.template2 .container .content .tab-list li img {
+.template2.container .content .tab-list li img {
   width: 3rem;
 }
 .container .content .user-list {
