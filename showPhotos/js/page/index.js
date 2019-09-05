@@ -3,6 +3,8 @@
 loadHtmlJson();
 // 加载广告
 appendAdvertisement();
+// 赞助商文案
+addSupportMsg();
 
 var gb_player_loaded = false
 var gb_rank_loaded = false

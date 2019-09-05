@@ -754,3 +754,30 @@ function appendAdvertisement() {
     });
   }
 }
+
+// 添加赞助商文案
+function addSupportMsg() {
+  $("#addsupport").remove();
+
+  var addsupport = getQueryString('addsupport');
+  var tpl = "<div></div>";
+  if(addsupport !== null){
+    // 获取机构名称
+    getOrgNameFn(function(data){
+      var orgName = data.records.orgName;
+      var appendSection = $("#html-template-1 .selectable-banner");
+      var msg = ""
+      //  芙蓉区和天心区
+      if(orgName.indexOf("芙蓉区") > -1 || orgName.indexOf("天心区") > -1 ) {
+        msg = "飞鹤/百诺恩/小熊BABY/子母母婴店友情赞助，凯歌健康技术支持";
+      }else if (orgName.indexOf("高新区") > -1){ // 高新区文案
+        msg = "飞鹤/百诺恩/子母母婴店友情赞助，凯歌健康技术支持";
+      }
+
+      if(msg !== '') {
+        var tpl = "<div style='text-align:center;color:white;font-size: 0.24rem;margin-top: 0.45rem;margin-bottom: 0.3rem;'>"+ msg +"</div>";
+        appendSection.after(tpl);
+      }
+    });
+  }
+}
