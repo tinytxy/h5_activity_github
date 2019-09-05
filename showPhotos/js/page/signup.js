@@ -1,6 +1,9 @@
 
 var uploadFile = '';
 
+// 加载广告
+appendAdvertisement();
+
 // 加载html结构
 loadHtmlJson(function(){
     // 判断是否需要移除机构名称

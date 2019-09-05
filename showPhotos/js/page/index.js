@@ -1,6 +1,8 @@
 
 // 加载html结构
 loadHtmlJson();
+// 加载广告
+appendAdvertisement();
 
 var gb_player_loaded = false
 var gb_rank_loaded = false
