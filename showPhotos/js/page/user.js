@@ -2,7 +2,9 @@
 // 加载html结构
 loadHtmlJson();
 // 加载广告
-appendAdvertisement();
+// ppendAdvertisement();
+// 加载机构名称
+headerShowOrgName();
 
 $(function(){
     setToken();

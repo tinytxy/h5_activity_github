@@ -5,6 +5,8 @@ loadHtmlJson();
 appendAdvertisement();
 // 赞助商文案
 addSupportMsg();
+// 加载机构名称
+headerShowOrgName();
 
 var gb_player_loaded = false
 var gb_rank_loaded = false

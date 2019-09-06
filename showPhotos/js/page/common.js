@@ -725,6 +725,7 @@ function compressImage(file, callback) {
   };
 }
 
+/* ---------------------补充功能逻辑--------------------- */
 // 添加进入N秒广告
 function appendAdvertisement() {
   $("#adImgdiv").remove();
@@ -776,6 +777,24 @@ function addSupportMsg() {
 
       if(msg !== '') {
         var tpl = "<div style='text-align:center;color:white;font-size: 0.24rem;margin-top: 0.45rem;margin-bottom: 0.3rem;'>"+ msg +"</div>";
+        appendSection.after(tpl);
+      }
+    });
+  }
+}
+
+// 展示机构名称标题
+function headerShowOrgName() {
+  $(".showorgname").remove();
+  var appendSection = $('[c_typename="logo"]');
+  var showOrgName = getQueryString('showorgname');
+  if(showOrgName !== null) {
+    // 获取机构名称
+    getOrgNameFn(function(data){
+      var orgName = data.records.orgName;
+      // 把机构名称填入到页面中
+      if(orgName !== '') {
+        var tpl = "<div class='showorgname' style='position: absolute;top: 0.15rem;left: 0.3rem;height: 0.51rem;font-size: 0.26rem;color: white;font-weight: bold;'>"+ orgName +"</div>";
         appendSection.after(tpl);
       }
     });

@@ -2,7 +2,9 @@
 var uploadFile = '';
 
 // 加载广告
-appendAdvertisement();
+// appendAdvertisement();
+// 加载机构名称
+headerShowOrgName();
 
 // 加载html结构
 loadHtmlJson(function(){
