@@ -3,8 +3,6 @@ var uploadFile = '';
 
 // 加载广告
 // appendAdvertisement();
-// 加载机构名称
-headerShowOrgName();
 
 // 加载html结构
 loadHtmlJson(function(){
@@ -25,6 +23,8 @@ $(function () {
         $('#act11739232574395').val(data.records.orgName)
     });
     voteDialogBindFn();
+    // 加载机构名称
+    headerShowOrgName();
 })
 
 // 元素点击事件绑定

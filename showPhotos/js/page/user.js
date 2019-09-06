@@ -3,8 +3,6 @@
 loadHtmlJson();
 // 加载广告
 // ppendAdvertisement();
-// 加载机构名称
-headerShowOrgName();
 
 $(function(){
     setToken();
@@ -17,6 +15,8 @@ $(function(){
     userCountDown(showTime/1000, endTime/1000, $('#act31142119991744 span'));  //倒计时
     userTabInfo();
     voteDialogBindFn();
+    // 加载机构名称
+    headerShowOrgName();
 });
 
 // 元素点击事件绑定
