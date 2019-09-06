@@ -733,12 +733,15 @@ function appendAdvertisement() {
   var time = getQueryString('adtime');
   var imgUrl = "http://qnfile.icareyou.net/9cf70c2d689c440cb5a426020fc571021567692920411.jpg?imageMogr2/size-limit/100k";
   // 广告模板
-  var tpl = "<div id='adImgdiv' style='position: fixed;top: 0;left: 0;right: 0;bottom: 0;z-index: 9999;background-color: #fff;'>"
+  var tpl = "<div id='adImgdiv' style='position: absolute;top: 0;left: 0;right: 0;bottom: 0;z-index: 9999;background-color: #fff;'>"
           +"<img id='adLoading' src='http://qnfile.icareyou.net/d357016fff92448ebeb6cebf5e73bcd81567699077002' style='left: 50%;width: 0.96rem;top: 40%;position: absolute;margin-left: -0.48rem;'>"
           +"<img id='adImg' src='http://qnfile.icareyou.net/9cf70c2d689c440cb5a426020fc571021567692920411.jpg?imageMogr2/size-limit/100k' style='width: 100%;display:none;'>"
           +"</div>";
   // 添加广告
   if(time !== null) {
+    // 隐藏首页页面
+    $("#html-template-1").hide();
+
     time = parseInt(time)
     $("body").append(tpl);
     // 图片加载完成
@@ -749,6 +752,8 @@ function appendAdvertisement() {
         setTimeout(function(){
           $("#adImgdiv").fadeOut(function(){
             $("#adImgdiv").remove();
+            $(document).scrollTop(0);
+            $("#html-template-1").show();
           });
         }, time*1000);
       }).show();
