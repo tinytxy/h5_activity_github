@@ -704,3 +704,26 @@ input {
   height: 3rem;
   overflow: hidden;
 }
+
+.showorgname {
+  padding-left: 0.55rem;
+  line-height: 0.51rem;
+  position: absolute;
+  top: 0.15rem;
+  left: 0.3rem;
+  height: 0.51rem;
+  font-size: 0.26rem;
+  color: white;
+  font-weight: bold;
+}
+
+.showorgname:after {
+  position: absolute;
+  content: "";
+  background-image: url('http://qnfile.icareyou.net/d16785f….jpg?imageMogr2/size-limit/100k');
+  background-repeat: no-repeat;
+  background-size: 100% 100%;
+  width: 0.5rem;
+  height: 0.5rem;
+  left: 0;
+}

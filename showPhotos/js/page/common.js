@@ -771,7 +771,9 @@ function addSupportMsg() {
     // 获取机构名称
     getOrgNameFn(function(data){
       var orgName = data.records.orgName;
-      var appendSection = $("#html-template-1 .selectable-banner");
+      var appendSection = $("#html-template-1 .content");
+      var appendSection2 = $("#html-template-2 .content");
+      var appendSection3 = $("#html-template-3 .content");
       var msg = ""
       //  芙蓉区和天心区
       if(orgName.indexOf("芙蓉区") > -1 || orgName.indexOf("天心区") > -1 ) {
@@ -783,6 +785,8 @@ function addSupportMsg() {
       if(msg !== '') {
         var tpl = "<div style='text-align:center;color:white;font-size: 0.24rem;margin-top: 0.45rem;margin-bottom: 0.3rem;'>"+ msg +"</div>";
         appendSection.after(tpl);
+        appendSection2.after(tpl);
+        appendSection3.after(tpl);
       }
     });
   }
@@ -799,7 +803,7 @@ function headerShowOrgName() {
       var orgName = data.records.orgName;
       // 把机构名称填入到页面中
       if(orgName !== '') {
-        var tpl = "<div class='showorgname' style='position: absolute;top: 0.15rem;left: 0.3rem;height: 0.51rem;font-size: 0.26rem;color: white;font-weight: bold;'>"+ orgName +"</div>";
+        var tpl = "<div class='showorgname'>"+ orgName +"</div>";
         appendSection.after(tpl);
       }
     });
