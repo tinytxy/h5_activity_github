@@ -717,7 +717,7 @@ input {
   font-weight: bold;
 }
 
-.showorgname:after {
+/* .showorgname:after {
   position: absolute;
   content: "";
   background-image: url('http://qnfile.icareyou.net/d16785f33b2f47d293fb0d6934f634091567999552738.jpg?imageMogr2/size-limit/100k');
@@ -726,4 +726,4 @@ input {
   width: 0.5rem;
   height: 0.5rem;
   left: 0;
-}
+} */
