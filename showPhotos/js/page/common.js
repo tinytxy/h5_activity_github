@@ -731,6 +731,10 @@ function appendAdvertisement() {
   $("#adImgdiv").remove();
   // 广告时间
   var time = getQueryString('adtime');
+  // 临时处理，需要移除
+  var acCode = getQueryString('activityCode');
+  time = (acCode === 'HD1190904172515' || acCode === 'HD1190904175331') ? '3': time;
+
   var imgUrl = "http://qnfile.icareyou.net/9cf70c2d689c440cb5a426020fc571021567692920411.jpg?imageMogr2/size-limit/100k";
   // 广告模板
   var tpl = "<div id='adImgdiv' style='position: absolute;top: 0;left: 0;right: 0;bottom: 0;z-index: 9999;background-color: #fff;'>"
@@ -738,7 +742,7 @@ function appendAdvertisement() {
           +"<img id='adImg' src='http://qnfile.icareyou.net/9cf70c2d689c440cb5a426020fc571021567692920411.jpg?imageMogr2/size-limit/100k' style='width: 100%;display:none;'>"
           +"</div>";
   // 添加广告
-  if(time !== null) {
+  if(time !== null || acCode === 'HD1190904172515' || acCode === 'HD1190904175331') {
     // 隐藏首页页面
     $("#html-template-1").hide();
 
@@ -766,8 +770,10 @@ function addSupportMsg() {
   $("#addsupport").remove();
 
   var addsupport = getQueryString('addsupport');
+  // 临时处理，需要移除
+  var acCode = getQueryString('activityCode');
   var tpl = "<div></div>";
-  if(addsupport !== null){
+  if(addsupport !== null || acCode === 'HD1190904172515' || acCode === 'HD1190904175331'){
     // 获取机构名称
     getOrgNameFn(function(data){
       var orgName = data.records.orgName;
@@ -797,7 +803,9 @@ function headerShowOrgName() {
   $(".showorgname").remove();
   var appendSection = $('[c_typename="logo"]');
   var showOrgName = getQueryString('showorgname');
-  if(showOrgName !== null) {
+  // 临时处理，需要移除
+  var acCode = getQueryString('activityCode');
+  if(showOrgName !== null || acCode === 'HD1190904172515' || acCode === 'HD1190904175331') {
     // 获取机构名称
     getOrgNameFn(function(data){
       var orgName = data.records.orgName;
