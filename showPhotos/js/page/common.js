@@ -107,6 +107,12 @@ function transPage(_pageNumber, _activityCode, _token, _addParam) {
   // _form.appendChild(inputToken);
   // document.body.appendChild(_form);
   // _form.submit();
+
+  // 活动页面内返回到首页不显示广告
+  if(_pageNumber === '1' && url.indexOf('noshowad=1') === -1) {
+    url = url + '&noshowad=1';
+  }
+
   window.location.href = url;
 }
 
@@ -728,40 +734,44 @@ function compressImage(file, callback) {
 /* ---------------------补充功能逻辑--------------------- */
 // 添加进入N秒广告
 function appendAdvertisement() {
-  $("#adImgdiv").remove();
-  // 广告时间
-  var time = getQueryString('adtime');
-  // 临时处理，需要移除
-  var acCode = getQueryString('activityCode');
-  time = (acCode === 'HD1190904172515' || acCode === 'HD1190904175331') ? '3': time;
+  // 活动页内跳转不显示广告
+  var noshowad = getQueryString('noshowad');
+  if(noshowad === null) {
+    $("#adImgdiv").remove();
+    // 广告时间
+    var time = getQueryString('adtime');
+    // 临时处理，需要移除
+    var acCode = getQueryString('activityCode');
+    time = (acCode === 'HD1190904172515' || acCode === 'HD1190904175331') ? '3': time;
 
-  var imgUrl = "http://qnfile.icareyou.net/9cf70c2d689c440cb5a426020fc571021567692920411.jpg?imageMogr2/size-limit/100k";
-  // 广告模板
-  var tpl = "<div id='adImgdiv' style='position: absolute;top: 0;left: 0;right: 0;bottom: 0;z-index: 9999;background-color: #fff;'>"
-          +"<img id='adLoading' src='http://qnfile.icareyou.net/d357016fff92448ebeb6cebf5e73bcd81567699077002' style='left: 50%;width: 0.96rem;top: 40%;position: absolute;margin-left: -0.48rem;'>"
-          +"<img id='adImg' src='http://qnfile.icareyou.net/9cf70c2d689c440cb5a426020fc571021567692920411.jpg?imageMogr2/size-limit/100k' style='width: 100%;display:none;'>"
-          +"</div>";
-  // 添加广告
-  if(time !== null || acCode === 'HD1190904172515' || acCode === 'HD1190904175331') {
-    // 隐藏首页页面
-    $("#html-template-1").hide();
+    var imgUrl = "http://qnfile.icareyou.net/9cf70c2d689c440cb5a426020fc571021567692920411.jpg?imageMogr2/size-limit/100k";
+    // 广告模板
+    var tpl = "<div id='adImgdiv' style='position: absolute;top: 0;left: 0;right: 0;bottom: 0;z-index: 9999;background-color: #fff;'>"
+            +"<img id='adLoading' src='http://qnfile.icareyou.net/d357016fff92448ebeb6cebf5e73bcd81567699077002' style='left: 50%;width: 0.96rem;top: 40%;position: absolute;margin-left: -0.48rem;'>"
+            +"<img id='adImg' src='http://qnfile.icareyou.net/9cf70c2d689c440cb5a426020fc571021567692920411.jpg?imageMogr2/size-limit/100k' style='width: 100%;display:none;'>"
+            +"</div>";
+    // 添加广告
+    if(time !== null || acCode === 'HD1190904172515' || acCode === 'HD1190904175331') {
+      // 隐藏首页页面
+      $("#html-template-1").hide();
 
-    time = parseInt(time)
-    $("body").append(tpl);
-    // 图片加载完成
-    $("#adLoading").on("load",function(){
-      $("#adImg").on("load",function(){
-        $("#adLoading").hide();
-        // N秒后关闭
-        setTimeout(function(){
-          $("#adImgdiv").fadeOut(function(){
-            $("#adImgdiv").remove();
-            $(document).scrollTop(0);
-            $("#html-template-1").show();
-          });
-        }, time*1000);
-      }).show();
-    });
+      time = parseInt(time)
+      $("body").append(tpl);
+      // 图片加载完成
+      $("#adLoading").on("load",function(){
+        $("#adImg").on("load",function(){
+          $("#adLoading").hide();
+          // N秒后关闭
+          setTimeout(function(){
+            $("#adImgdiv").fadeOut(function(){
+              $("#adImgdiv").remove();
+              $(document).scrollTop(0);
+              $("#html-template-1").show();
+            });
+          }, time*1000);
+        }).show();
+      });
+    }
   }
 }
 

@@ -261,6 +261,7 @@ function getPlayerList(playerListData) {
     var i = 0
     var item = $(".item",list)[0];
     var tempItem = list.clone();
+
     // 清空子元素
     tempItem.empty().show();
     if(playerListData.records.length) {
@@ -272,7 +273,8 @@ function getPlayerList(playerListData) {
             // 名称替换
             $('.user-name',item).text(playerListData.records[i].name);
             // 机构名称替换
-            if(rules.acActivityOrgs.length === 0){
+            // 特殊处理
+            if(rules.acActivityOrgs.length === 0 || activityCode === 'HD1190904175331' || activityCode === 'HD1190904172515'){
               $('.vote-struct',item).remove();
             }else {
               $('.vote-struct',item).text(playerListData.records[i].orgName);
