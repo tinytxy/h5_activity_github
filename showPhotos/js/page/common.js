@@ -783,7 +783,7 @@ function addSupportMsg() {
   // 临时处理，需要移除
   var acCode = getQueryString('activityCode');
   var tpl = "<div></div>";
-  if(addsupport !== null || acCode === 'HD1190904172515' || acCode === 'HD1190904175331'){
+  if(addsupport !== null || acCode === 'HD1190904172515' || acCode === 'HD1190904175331' || acCode === 'HD1190912144641'){
     // 获取机构名称
     getOrgNameFn(function(data){
       var orgName = data.records.orgName;
@@ -796,6 +796,8 @@ function addSupportMsg() {
         msg = "飞鹤/百诺恩/小熊BABY/子母母婴店友情赞助，凯歌健康技术支持";
       }else if (orgName.indexOf("高新区") > -1){ // 高新区文案
         msg = "飞鹤/百诺恩/子母母婴店友情赞助，凯歌健康技术支持";
+      } else if (acCode === 'HD1190912144641'){
+        msg = "嬉水广场4楼瑞丽摄影友情赞助，凯歌健康技术支持";
       }
 
       if(msg !== '') {
