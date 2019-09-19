@@ -335,7 +335,8 @@ function getRangeList(rankListData){
         // $('.number',tr).text(i+1);
         $('.number',tr).text(rankListData.records[i].ranking);
         // 前三名有特殊图标
-        if(i < 3) {
+        // if(i < 3) {
+        if(rankListData.records[i].ranking < 4) {
         $('.number',tr).removeClass().addClass('number ' + ('badge-no'+(i+1)));
         } else {
         $('.number',tr).removeClass().addClass('number');
