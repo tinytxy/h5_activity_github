@@ -332,7 +332,8 @@ function getRangeList(rankListData){
    if(rankListData.records.length) {
     for(;i < rankListData.records.length; i++){
         // 替换序号 badge-no1
-        $('.number',tr).text(i+1);
+        // $('.number',tr).text(i+1);
+        $('.number',tr).text(rankListData.records[i].ranking);
         // 前三名有特殊图标
         if(i < 3) {
         $('.number',tr).removeClass().addClass('number ' + ('badge-no'+(i+1)));
