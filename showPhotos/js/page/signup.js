@@ -595,14 +595,19 @@ function uploadFileFn(file) {
     var _header = {
       'x-token': getToken()
     }
+    
+    var authUrl = ""
     if(authId !== null) {
       _header['auth_id'] = authId
+      authUrl = 'http://auth.icaremgt.com/api-admin-manage/system/components/upload?auth_id='+authId;
+    } else {
+      authUrl = manageUrl + '/api-admin-manage/system/components/upload';
     }
 
     $.ajax({
         type: 'POST',
         headers: _header,
-        url: manageUrl + '/api-admin-manage/system/components/upload',
+        url: authUrl,
         data: formData,
         contentType: false,
         processData: false,
