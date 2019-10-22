@@ -165,12 +165,18 @@ function getOrgNameFn(callback) {
   }
 
   var orgId = getQueryString('orgId')
+  var authId = getQueryString('auth_id')
+  var _header = {
+    'x-token': getToken()
+  }
+  if(authId !== null) {
+    _header['auth_id'] = authId
+  } 
+
   $.ajax({
       type: 'GET',
       url: baseUrl + '/ORG/hospital/community/hospitalInfo/' + orgId,
-      headers: {
-          'x-token': getToken()
-      },
+      headers: _header,
       success: function(data) {
           if(data.code == 200) {
             callback && callback(data)
@@ -199,14 +205,20 @@ function showQrcode(callback) {
     }
   }
 
+  var authId = getQueryString('auth_id')
+  var _header = {
+    'x-token': getToken()
+  }
+  if(authId !== null) {
+    _header['auth_id'] = authId
+  } 
+
   if(orgQrCode == '') {
     var baseurlCode = orgId ? (baseUrl + '/ACTIVITY/' + activityCode + '/qr-code-url?orgId=' + orgId) : (baseUrl + '/ACTIVITY/' + activityCode + '/qr-code-url')
       $.ajax({
         type: 'GET',
         url: baseurlCode,
-        headers: {
-            'x-token': getToken()
-        },
+        headers: _header,
         success: function(data) {
             if(data.status == 200) {
               orgQrCode = data.result.qrCodeUrl
@@ -353,13 +365,20 @@ function getActivityTitle() {
   var params = {
     activityCode: activityCode
   }
+
+  var authId = getQueryString('auth_id')
+  var _header = {
+    'x-token': getToken()
+  }
+  if(authId !== null) {
+    _header['auth_id'] = authId
+  } 
+
   $.ajax({
       type: 'GET',
       url: baseUrl + '/ACTIVITY/'+ activityCode +'/settings',
       data: params,
-      headers: {
-        'x-token': getToken()
-      },
+      headers: _header,
       success: function(data) {
           if(data.status == 200) {
             var title = data.result.settings.szText.h5Title;
@@ -412,13 +431,19 @@ function voteClickFn(params, successCallback, errorCallback){
   shareUserId = params.userId;
   shareUserName  = params.userName;
   
+  var authId = getQueryString('auth_id')
+  var _header = {
+    'x-token': getToken()
+  }
+  if(authId !== null) {
+    _header['auth_id'] = authId
+  }
+
   $.ajax({
     type: 'PUT',
     url: baseUrl + '/ACTIVITY/sz/vote/' + activityCode,
     data: params,
-    headers: {
-        'x-token': getToken()
-    },
+    headers: _header,
     success: function(data) {
         
         if(data.status == 200) {

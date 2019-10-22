@@ -213,15 +213,21 @@ function getAjaxListSearch(type,page,callback) {
         name: searchVal   // 搜索字段
     }
 
+    var authId = getQueryString('auth_id')
+    var _header = {
+      'x-token': getToken()
+    }
+    if(authId !== null) {
+      _header['auth_id'] = authId
+    }
+
     // 加载loading
     showLoading();
     $.ajax({
         type: 'GET',
         url: baseUrl + '/ACTIVITY/sz/search/' + activityCode,
         data: params,
-        headers: {
-            'x-token': getToken()
-        },
+        headers: _header,
         success: function(data) {
             if(data.status == 200) {
                 if(type == 'player' || type == 'search') {

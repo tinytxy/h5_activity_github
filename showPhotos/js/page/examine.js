@@ -22,12 +22,18 @@ function pass(){
     userId: getQueryString('userId')
   }
 
+  var authId = getQueryString('auth_id')
+  var _header = {
+    'x-token': getToken()
+  }
+  if(authId !== null) {
+    _header['auth_id'] = authId
+  }
+
   $.ajax({
     type: 'PUT',
     url: baseUrl + '/ACTIVITY/sz/review-user/' + activityCode,
-    headers: {
-      'x-token': getToken()
-    },
+    headers: _header,
     data: params,
     success: function(data) {
         if(data.status == 200) {
@@ -58,13 +64,19 @@ function refuse(){
     userId: getQueryString('userId')
   }
 
+  var authId = getQueryString('auth_id')
+  var _header = {
+    'x-token': getToken()
+  }
+  if(authId !== null) {
+    _header['auth_id'] = authId
+  }
+
   $.ajax({
     type: 'PUT',
     url: baseUrl + '/ACTIVITY/sz/review-user/' + activityCode,
     data: params,
-    headers: {
-      'x-token': getToken()
-    },
+    headers: _header,
     success: function(data) {
         if(data.status == 200) {
             $.dialog({
@@ -93,13 +105,20 @@ function userTabInfo() {
     var params = {
         id: id
     }
+
+    var authId = getQueryString('auth_id')
+    var _header = {
+      'x-token': getToken()
+    }
+    if(authId !== null) {
+      _header['auth_id'] = authId
+    }
+
     $.ajax({
         type: 'GET',
         url: baseUrl + '/ACTIVITY/sz/search/' + activityCode,
         data: params,
-        headers: {
-          'x-token': getToken()
-        },
+        headers: _header,
         success: function(data) {
             if(data.status == 200) {
               var userInfoObj = data.result && data.result.records && data.result.records[0];
@@ -143,13 +162,20 @@ function getActivityTitle() {
     var params = {
       activityCode: activityCode
     }
+
+    var authId = getQueryString('auth_id')
+    var _header = {
+      'x-token': getToken()
+    }
+    if(authId !== null) {
+      _header['auth_id'] = authId
+    }
+
     $.ajax({
         type: 'GET',
         url: baseUrl + '/ACTIVITY/'+ activityCode +'/settings',
         data: params,
-        headers: {
-          'x-token': getToken()
-        },
+        headers: _header,
         success: function(data) {
             if(data.status == 200) {
               var title = data.result.settings.szText.h5Title;

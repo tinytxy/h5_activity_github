@@ -143,13 +143,20 @@ function userTabInfo() {
         id: id,
         reviewStatus:1  // 审核状态
     }
+
+    var authId = getQueryString('auth_id')
+    var _header = {
+        'x-token': getToken()
+    }
+    if(authId !== null) {
+        _header['auth_id'] = authId
+    }
+
     $.ajax({
         type: 'GET',
         url: baseUrl + '/ACTIVITY/sz/search/' + activityCode,
         data: params,
-        headers: {
-            'x-token': getToken()
-        },
+        headers: _header,
         success: function(data) {
             if(data.status == 200) {
                 var userInfoObj = data.result && data.result.records && data.result.records[0]

@@ -141,9 +141,19 @@ function btnBindClick() {
             }
         }
         var _token = getToken();
+
+        var authId = getQueryString('auth_id')
+        var _header = {
+            'content-type': 'application/json',
+            'x-token': _token
+        }
+        if(authId !== null) {
+            _header['auth_id'] = authId
+        }
+
         $.ajax({
             type: 'POST',
-            headers: {'content-type': 'application/json','x-token': _token},
+            headers: _header,
             url: baseUrl + '/ACTIVITY/sz/sign-up/' + activityCode,
             data: JSON.stringify(params),
             success: function (data) {
@@ -580,8 +590,18 @@ function uploadFileFn(file) {
     var formData = new FormData();
     formData.append('file', file)
     selectFileImage(file)
+
+    var authId = getQueryString('auth_id')
+    var _header = {
+      'x-token': getToken()
+    }
+    if(authId !== null) {
+      _header['auth_id'] = authId
+    }
+
     $.ajax({
         type: 'POST',
+        headers: _header,
         url: manageUrl + '/api-admin-manage/system/components/upload',
         data: formData,
         contentType: false,
