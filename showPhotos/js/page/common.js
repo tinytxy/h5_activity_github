@@ -409,7 +409,7 @@ function showLoading(msg){
   $.dialog({
     type : 'info',
     infoText : msg ? msg : '加载中…',
-    infoIcon : 'https://raw.githubusercontent.com/tinytxy/h5_activity_github/master/showPhotos/images/loading_2.gif',
+    infoIcon : 'http://qnfile.icareyou.net/427df437f5364507bc000988070e50511572340309108?imageMogr2/size-limit/100k',
     direction: '',
 	  align: 'center'
   });
