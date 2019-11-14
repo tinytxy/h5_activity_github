@@ -77,7 +77,8 @@ function btnBindClick() {
 
     
     // 上传图片
-    $("#uploadImage").on('change', function () {
+    // $("#uploadImage").on('change', function () {
+    $(document).on('change','#uploadImage',function () {
         var _file = this.files[0];
         // 图片大于1M压缩
         var filesize = _file.size / 1024 /1024;
