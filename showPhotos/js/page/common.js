@@ -755,7 +755,10 @@ function compressImage(file, callback) {
       img.src = e.target.result;
     };
   } catch (error) {
-    alert(error)
+    if(window.location.href.indexOf('test') > -1){
+        alert('compressImage内部')
+        alert(error)
+    }
   }
 }
 

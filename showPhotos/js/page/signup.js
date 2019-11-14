@@ -77,14 +77,25 @@ function btnBindClick() {
     
     // 上传图片
     $("#uploadImage").on('change', function () {
+        // 测试代码
+        if(window.location.href.indexOf('test') > -1){
+            alert('进入change事件')
+        }
+
         var _file = this.files[0];
         // 图片大于1M压缩
         var filesize = _file.size / 1024 /1024;
         if(filesize > 1) {
             compressImage(_file, function(blob){
                // blob转file
-               var newFile = blobTransferFile(blob);
+               try {
+                var newFile = blobTransferFile(blob);
                 uploadFileFn(newFile);
+               } catch (error) {
+                    if(window.location.href.indexOf('test') > -1){
+                        alert(error)
+                    }
+               }
             });
         }else {
             uploadFileFn(_file);
