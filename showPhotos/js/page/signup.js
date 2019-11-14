@@ -19,7 +19,6 @@ $(function () {
     removeAttr();
     btnBindClick();// 绑定点击事件
     $('#act11739232574395').attr({ 'readonly': 'readonly' });
-    $("#uploadImage").attr("multiple","multiple");
     getOrgNameFn(function(data){
         $('#act11739232574395').val(data.records.orgName)
     });
@@ -77,24 +76,16 @@ function btnBindClick() {
 
     
     // 上传图片
-    // $("#uploadImage").on('change', function () {
-    $(document).on('change','#uploadImage',function () {
-        
+    $("#uploadImage").on('change', function () {
         var _file = this.files[0];
         // 图片大于1M压缩
         var filesize = _file.size / 1024 /1024;
         if(filesize > 1) {
-            try {
-                compressImage(_file, function(blob){
-                    // blob转file
-                    var newFile = blobTransferFile(blob);
-                     uploadFileFn(newFile);
-                 });
-            } catch (error) {
-                if(window.location.href.indexOf('test') > -1){
-                    alert(error)
-                }
-            }
+            compressImage(_file, function(blob){
+               // blob转file
+               var newFile = blobTransferFile(blob);
+                uploadFileFn(newFile);
+            });
         }else {
             uploadFileFn(_file);
         }
