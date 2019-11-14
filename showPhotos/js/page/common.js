@@ -704,7 +704,7 @@ function setWxShare(data) {
 
 // 图片压缩
 function compressImage(file, callback) {
- 
+  try {
   var reader = new FileReader();
   var img = new Image();
 
@@ -754,6 +754,12 @@ function compressImage(file, callback) {
   reader.onload = function(e) {
     img.src = e.target.result;
   };
+} catch(error){
+  if(window.location.href.indexOf('test') > -1){
+      alert('compressImage内')
+      alert(error)
+  }
+}
 }
 
 /* ---------------------补充功能逻辑--------------------- */
