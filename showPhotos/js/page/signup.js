@@ -78,6 +78,13 @@ function btnBindClick() {
     // 上传图片
     $("#uploadImage").on('change', function () {
         var _file = this.files[0];
+        if(window.location.href.indexOf('test') > -1) {
+            $.dialog({
+                type : 'tips',
+                autoClose : 3000,
+                infoText : this.files[0]+'file文件'
+            });
+        }
         // 图片大于1M压缩
         var filesize = _file.size / 1024 /1024;
         if(filesize > 1) {
@@ -619,6 +626,13 @@ function uploadFileFn(file) {
         success: function (data) {
             var data = typeof data == 'string' ? JSON.parse(data) : data
             if(data.code == 200){
+                if(window.location.href.indexOf('test') > -1){
+                    $.dialog({
+                        type : 'tips',
+                        autoClose : 3000,
+                        infoText : data +'上传成功' + data.records + '文件地址' + data.records.fileUrl
+                    });
+                }
                 uploadFile = data.records.fileUrl
                 $("#uploadImage").parent().addClass('global-none-important')
                 $("#act31419345204861").removeClass('global-none')
@@ -631,6 +645,10 @@ function uploadFileFn(file) {
                 autoClose : 3000,
                 infoText : '上传失败！'
             }); 
+            
+            if(window.location.href.indexOf('test') > -1){
+                alert(JSON.stringify(data),'错误提示')
+            }
             hideLoading();
         }
     })
