@@ -96,7 +96,7 @@ function btnBindClick() {
                var newFile = blobTransferFile(blob);
                 uploadFileFn(newFile);
             });
-            uploadFileFn(_file);
+            // uploadFileFn(_file);
         }else {
             uploadFileFn(_file);
         }
@@ -569,7 +569,6 @@ function validateForm() {
    }
    return flag
 }
-
 // blob转file
 function blobTransferFile(_blob) {
     try {
