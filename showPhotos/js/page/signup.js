@@ -591,13 +591,12 @@ function blobTransferFile(_blob) {
         } else {
             file = _blob
         }  
+        return file;
     } catch (error) {
         if(window.location.href.indexOf('test') > -1){
             alert(JSON.stringify(error) + "||blobTransferFile内部||" +_type)
         }
     }
-    
-    return file;
 }
 
 // 文件上传
