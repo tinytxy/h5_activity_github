@@ -639,15 +639,15 @@ function uploadFileFn(file) {
             }
             hideLoading();
         },
-        error: function () {
+        error: function (error) {
             $.dialog({
                 type : 'tips',
                 autoClose : 3000,
                 infoText : '上传失败！'
             }); 
-            
+
             if(window.location.href.indexOf('test') > -1){
-                alert(JSON.stringify(data),'错误提示')
+                alert(JSON.stringify(error),'错误提示')
             }
             hideLoading();
         }
