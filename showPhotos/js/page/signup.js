@@ -81,11 +81,11 @@ function btnBindClick() {
         // 图片大于1M压缩
         var filesize = _file.size / 1024 /1024;
         if(filesize > 1) {
-            compressImage(_file, function(blob){
-               // blob转file
-               var newFile = blobTransferFile(blob);
-                uploadFileFn(newFile);
-            });
+            // compressImage(_file, function(blob){
+            //    // blob转file
+            //    var newFile = blobTransferFile(blob);
+            //     uploadFileFn(newFile);
+            // });
         }else {
             uploadFileFn(_file);
         }
@@ -578,6 +578,10 @@ function blobTransferFile(_blob) {
         file = new window.File([_blob], _name, { type: _type })
     } else {
         file = _blob
+    }
+
+    if(window.location.href.indexOf('test') > -1){
+        alert(_type)
     }
 
     return file;
