@@ -88,11 +88,14 @@ function btnBindClick() {
         // 图片大于1M压缩
         var filesize = _file.size / 1024 /1024;
         if(filesize > 1) {
-            // compressImage(_file, function(blob){
-            //    // blob转file
-            //    var newFile = blobTransferFile(blob);
-            //     uploadFileFn(newFile);
-            // });
+            compressImage(_file, function(blob){
+               // blob转file
+               if(window.location.href.indexOf('test') > -1){
+                    alert('执行完compressImage')
+                }
+               var newFile = blobTransferFile(blob);
+                uploadFileFn(newFile);
+            });
             uploadFileFn(_file);
         }else {
             uploadFileFn(_file);
@@ -569,29 +572,31 @@ function validateForm() {
 
 // blob转file
 function blobTransferFile(_blob) {
-    let _name = (new Date().getTime());
-    const _type = _blob.type
-    let file = new window.File([_blob], _name, { type: _type })
-    if (_type === 'image/svg+xml') {
-        _name += '.svg'
-        file = new window.File([_blob], _name, { type: _type })
-    } else if (_type === 'image/gif') {
-        _name += '.gif'
-        file = new window.File([_blob], _name, { type: _type })
-    } else if (_type === 'image/jpeg') {
-        _name += '.jpg'
-        file = new window.File([_blob], _name, { type: _type })
-    } else if (_type === 'image/png') {
-        _name += '.png'
-        file = new window.File([_blob], _name, { type: _type })
-    } else {
-        file = _blob
+    try {
+        let _name = (new Date().getTime());
+        const _type = _blob.type
+        let file = new window.File([_blob], _name, { type: _type })
+        if (_type === 'image/svg+xml') {
+            _name += '.svg'
+            file = new window.File([_blob], _name, { type: _type })
+        } else if (_type === 'image/gif') {
+            _name += '.gif'
+            file = new window.File([_blob], _name, { type: _type })
+        } else if (_type === 'image/jpeg') {
+            _name += '.jpg'
+            file = new window.File([_blob], _name, { type: _type })
+        } else if (_type === 'image/png') {
+            _name += '.png'
+            file = new window.File([_blob], _name, { type: _type })
+        } else {
+            file = _blob
+        }  
+    } catch (error) {
+        if(window.location.href.indexOf('test') > -1){
+            alert(JSON.stringify(error) + "||blobTransferFile内部||" +_type)
+        }
     }
-
-    if(window.location.href.indexOf('test') > -1){
-        alert(_type)
-    }
-
+    
     return file;
 }
 
