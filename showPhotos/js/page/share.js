@@ -71,8 +71,3 @@ wx.ready(function(){
         }
     });
 });
-
-// wx.error(function(res) {
-//     console.log('错误信息 === ')
-//     alert(JSON.stringify(res))
-// })

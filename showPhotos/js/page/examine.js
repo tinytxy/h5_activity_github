@@ -27,7 +27,7 @@ function pass(){
     'x-token': getToken()
   }
   if(authId !== null) {
-    _header['auth_id'] = authId
+    _header['auth-id'] = authId
   }
 
   $.ajax({
@@ -69,7 +69,7 @@ function refuse(){
     'x-token': getToken()
   }
   if(authId !== null) {
-    _header['auth_id'] = authId
+    _header['auth-id'] = authId
   }
 
   $.ajax({
@@ -111,7 +111,7 @@ function userTabInfo() {
       'x-token': getToken()
     }
     if(authId !== null) {
-      _header['auth_id'] = authId
+      _header['auth-id'] = authId
     }
 
     $.ajax({
@@ -168,7 +168,7 @@ function getActivityTitle() {
       'x-token': getToken()
     }
     if(authId !== null) {
-      _header['auth_id'] = authId
+      _header['auth-id'] = authId
     }
 
     $.ajax({

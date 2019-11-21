@@ -170,7 +170,7 @@ function getOrgNameFn(callback) {
     'x-token': getToken()
   }
   if(authId !== null) {
-    _header['auth_id'] = authId
+    _header['auth-id'] = authId
   } 
 
   $.ajax({
@@ -210,7 +210,7 @@ function showQrcode(callback) {
     'x-token': getToken()
   }
   if(authId !== null) {
-    _header['auth_id'] = authId
+    _header['auth-id'] = authId
   } 
 
   if(orgQrCode == '') {
@@ -371,7 +371,7 @@ function getActivityTitle() {
     'x-token': getToken()
   }
   if(authId !== null) {
-    _header['auth_id'] = authId
+    _header['auth-id'] = authId
   } 
 
   $.ajax({
@@ -436,7 +436,7 @@ function voteClickFn(params, successCallback, errorCallback){
     'x-token': getToken()
   }
   if(authId !== null) {
-    _header['auth_id'] = authId
+    _header['auth-id'] = authId
   }
 
   $.ajax({
@@ -704,7 +704,7 @@ function setWxShare(data) {
 
 // 图片压缩
 function compressImage(file, callback) {
-  
+
   var reader = new FileReader();
   var img = new Image();
 

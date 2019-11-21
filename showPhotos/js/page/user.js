@@ -149,7 +149,7 @@ function userTabInfo() {
         'x-token': getToken()
     }
     if(authId !== null) {
-        _header['auth_id'] = authId
+        _header['auth-id'] = authId
     }
 
     $.ajax({

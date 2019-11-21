@@ -82,10 +82,10 @@ function btnBindClick() {
         var filesize = _file.size / 1024 /1024;
         if(filesize > 1) {
             compressImage(_file, function(blob){
+               // blob转file
                var newFile = blobTransferFile(blob);
                 uploadFileFn(newFile);
             });
-            // uploadFileFn(_file);
         }else {
             uploadFileFn(_file);
         }
@@ -148,7 +148,7 @@ function btnBindClick() {
             'x-token': _token
         }
         if(authId !== null) {
-            _header['auth_id'] = authId
+            _header['auth-id'] = authId
         }
 
         $.ajax({
@@ -558,6 +558,7 @@ function validateForm() {
    }
    return flag
 }
+
 // blob转file
 function blobTransferFile(_blob) {
     let _name = (new Date().getTime());
@@ -577,7 +578,8 @@ function blobTransferFile(_blob) {
         file = new window.File([_blob], _name, { type: _type })
     } else {
         file = _blob
-    }  
+    }
+
     return file;
 }
 
@@ -596,7 +598,7 @@ function uploadFileFn(file) {
     
     var authUrl = ""
     if(authId !== null) {
-      _header['auth_id'] = authId
+      _header['auth-id'] = authId
       authUrl = 'http://auth.icaremgt.com/api-admin-manage/system/components/upload?auth_id='+authId;
     } else {
       authUrl = manageUrl + '/api-admin-manage/system/components/upload';
@@ -618,7 +620,7 @@ function uploadFileFn(file) {
             }
             hideLoading();
         },
-        error: function (error) {
+        error: function () {
             $.dialog({
                 type : 'tips',
                 autoClose : 3000,
