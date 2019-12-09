@@ -119,7 +119,7 @@ function btnBindClick() {
         var endTime = new Date(_settings.szRule.votingStartTime).getTime() - new Date(currentTime).getTime();
 
         // 2019-12-9 跳转特殊处理金港镇晒照活动，投票开始时候不能报名
-        if(_activityCode === 'HD1191209101728' && endTime/1000 < 0) {
+        if(activityCode === 'HD1191209101728' && endTime/1000 < 0) {
             alert('当前活动投票已经开始，不可再报名！');
             return
         }
