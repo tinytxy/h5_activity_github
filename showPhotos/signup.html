@@ -7,17 +7,17 @@
     <meta name="format-detection" content="telephone=no">
     <title></title>
     <!-- <link rel="stylesheet" href="css/activity.css" /> -->
-    <link rel="stylesheet" href="https://rawcdn.githack.com/tinytxy/h5_activity_github/3fb4a7d10c872c4098dabf82cb8929ed235d111d/showPhotos/css/activity.css">
-    <link rel="stylesheet" href="https://rawcdn.githack.com/tinytxy/h5_activity_github/3fb4a7d10c872c4098dabf82cb8929ed235d111d/showPhotos/css/dialog.css">
-    <script type="text/javascript" src="https://rawcdn.githack.com/tinytxy/h5_activity_github/3fb4a7d10c872c4098dabf82cb8929ed235d111d/showPhotos/js/jquery-3.4.1.min.js"></script>
-    <script type="text/javascript" src="https://rawcdn.githack.com/tinytxy/h5_activity_github/3fb4a7d10c872c4098dabf82cb8929ed235d111d/showPhotos/js/dialog.js"></script>
-    <script type="text/javascript" src="https://rawcdn.githack.com/tinytxy/h5_activity_github/3fb4a7d10c872c4098dabf82cb8929ed235d111d/showPhotos/js/exif.js"></script>
-    <script type="text/javascript" src="https://rawcdn.githack.com/tinytxy/h5_activity_github/3fb4a7d10c872c4098dabf82cb8929ed235d111d/showPhotos/js/jpeg_encoder_basic.js"></script>
-    <script type="text/javascript" src="https://rawcdn.githack.com/tinytxy/h5_activity_github/3fb4a7d10c872c4098dabf82cb8929ed235d111d/showPhotos/js/html2Json.js"></script>
-    <script type="text/javascript" src="https://rawcdn.githack.com/tinytxy/h5_activity_github/3fb4a7d10c872c4098dabf82cb8929ed235d111d/showPhotos/js/pageJson/signupJson.js"></script>
-    <script type="text/javascript" src="https://rawcdn.githack.com/tinytxy/h5_activity_github/3fb4a7d10c872c4098dabf82cb8929ed235d111d/showPhotos/js/modalJson/shareModal.js"></script>
-    <script type="text/javascript" src="https://rawcdn.githack.com/tinytxy/h5_activity_github/3fb4a7d10c872c4098dabf82cb8929ed235d111d/showPhotos/js/removeAttr.js"></script>
-    <script type="text/javascript" src="https://rawcdn.githack.com/tinytxy/h5_activity_github/3fb4a7d10c872c4098dabf82cb8929ed235d111d/showPhotos/js/autoFontsize.min.js"></script>
+    <link rel="stylesheet" href="http://vue-admin-manage.icaremgt.com/activityadmin/showPhotos/css/activity.css">
+    <link rel="stylesheet" href="http://vue-admin-manage.icaremgt.com/activityadmin/showPhotos/css/dialog.css">
+    <script type="text/javascript" src="http://vue-admin-manage.icaremgt.com/activityadmin/showPhotos/js/jquery-3.4.1.min.js"></script>
+    <script type="text/javascript" src="http://vue-admin-manage.icaremgt.com/activityadmin/showPhotos/js/dialog.js"></script>
+    <script type="text/javascript" src="http://vue-admin-manage.icaremgt.com/activityadmin/showPhotos/js/exif.js"></script>
+    <script type="text/javascript" src="http://vue-admin-manage.icaremgt.com/activityadmin/showPhotos/js/jpeg_encoder_basic.js"></script>
+    <script type="text/javascript" src="http://vue-admin-manage.icaremgt.com/activityadmin/showPhotos/js/html2Json.js"></script>
+    <script type="text/javascript" src="http://vue-admin-manage.icaremgt.com/activityadmin/showPhotos/js/pageJson/signupJson.js"></script>
+    <script type="text/javascript" src="http://vue-admin-manage.icaremgt.com/activityadmin/showPhotos/js/modalJson/shareModal.js"></script>
+    <script type="text/javascript" src="http://vue-admin-manage.icaremgt.com/activityadmin/showPhotos/js/removeAttr.js"></script>
+    <script type="text/javascript" src="http://vue-admin-manage.icaremgt.com/activityadmin/showPhotos/js/autoFontsize.min.js"></script>
     <script type="text/javascript" src="https://res.wx.qq.com/open/js/jweixin-1.4.0.js"></script>
     <script type="text/javascript" src="signup_data.js"></script>
     <!-- <script type="text/javascript" th:inline="javascript">
@@ -30,11 +30,17 @@
 </head>
 
 <body>
-    
+    <script type="text/javascript">
+        if(window.location.href.indexOf('www.icareyou.net')>-1) {
+            var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan style='display:none;'  id='cnzz_stat_icon_1278014392'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s4.cnzz.com/z_stat.php%3Fid%3D1278014392' type='text/javascript'%3E%3C/script%3E"));
+        }else if(window.location.href.indexOf('auth.icaremgt.com')>-1) {
+            var cnzz_protocol = (("https:" == document.location.protocol) ? "https://" : "http://");document.write(unescape("%3Cspan style='display:none;' id='cnzz_stat_icon_1278285993'%3E%3C/span%3E%3Cscript src='" + cnzz_protocol + "s4.cnzz.com/z_stat.php%3Fid%3D1278285993' type='text/javascript'%3E%3C/script%3E"));
+        }
+    </script>
 </body>
-<script type="text/javascript" src="https://rawcdn.githack.com/tinytxy/h5_activity_github/3fb4a7d10c872c4098dabf82cb8929ed235d111d/showPhotos/js/page/common.js"></script>
-<script type="text/javascript" src="https://rawcdn.githack.com/tinytxy/h5_activity_github/3fb4a7d10c872c4098dabf82cb8929ed235d111d/showPhotos/js/page/share.js"></script>
-<script type="text/javascript" src="https://rawcdn.githack.com/tinytxy/h5_activity_github/3fb4a7d10c872c4098dabf82cb8929ed235d111d/showPhotos/js/page/signup.js"></script>
+<script type="text/javascript" src="http://vue-admin-manage.icaremgt.com/activityadmin/showPhotos/js/page/common.js"></script>
+<script type="text/javascript" src="http://vue-admin-manage.icaremgt.com/activityadmin/showPhotos/js/page/share.js"></script>
+<script type="text/javascript" src="http://vue-admin-manage.icaremgt.com/activityadmin/showPhotos/js/page/signup.js"></script>
 <!-- <script type="text/javascript" src="js/page/common.js"></script>-->
 <!-- <script type="text/javascript" src="js/page/signup.js"></script>  -->
 </html>
