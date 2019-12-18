@@ -116,7 +116,9 @@ function btnBindClick() {
 
     // 报名按钮
     $("#act31527459124456").off("click").on("click",function(){
-        var endTime = new Date(_settings.szRule.votingStartTime).getTime() - new Date(currentTime).getTime();
+        var _votingStartTime = _settings.szRule.votingStartTime.replace(/-/g,'/');
+        var _cTime = currentTime.replace(/-/g, '/');
+        var endTime = new Date(_votingStartTime).getTime() - new Date(_cTime).getTime();
 
         // 2019-12-9 跳转特殊处理金港镇晒照活动，投票开始时候不能报名
         if(activityCode === 'HD1191209101728' && endTime/1000 < 0) {
